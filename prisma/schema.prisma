@@ -1,0 +1,25 @@
+// Prisma schema for Funeraria & Parque Memorial
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Lead {
+  id        String   @id @default(cuid())
+  name      String
+  email     String?
+  phone     String?
+  service   String   // "contacto" | "parque-memorial" | "reservacion" | ...
+  interest  String?  // Para parque-memorial: nichos | parcelas | mausoleo | jardin
+  message   String?
+  source    String?  // Página origen
+  createdAt DateTime @default(now())
+
+  @@index([service])
+  @@index([createdAt])
+}
