@@ -1,71 +1,55 @@
-import {
-  Building2,
-  Heart,
-  Flame,
-  Car,
-  Trees,
-  ClipboardList,
-  type LucideIcon,
-} from "lucide-react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Building2, ClipboardList, Flame, type LucideIcon } from "lucide-react";
 import { services } from "@/lib/site-config";
 
 const iconMap: Record<string, LucideIcon> = {
   Building2,
-  Heart,
-  Flame,
-  Car,
-  Trees,
   ClipboardList,
+  Flame,
 };
 
 export function ServicesSection() {
   return (
     <section
       id="servicios"
-      className="py-20 sm:py-28 bg-background"
-      aria-labelledby="services-heading"
+      aria-labelledby="servicios-heading"
+      className="bg-cream border-t border-border/60"
     >
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="max-w-2xl mx-auto text-center">
-          <span className="text-xs font-semibold uppercase tracking-[0.18em] text-primary">
-            Nuestros servicios
-          </span>
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16 sm:py-20">
+        <div className="text-center max-w-2xl mx-auto">
+          <p className="section-divider text-[11px] font-semibold uppercase tracking-[0.3em] text-gold">
+            Servicios
+          </p>
           <h2
-            id="services-heading"
-            className="mt-3 font-serif text-3xl sm:text-4xl font-semibold tracking-tight"
+            id="servicios-heading"
+            className="mt-4 font-serif text-3xl sm:text-4xl font-semibold text-foreground"
           >
-            Acompañamiento completo en cada etapa
+            A su lado en cada momento
           </h2>
-          <p className="mt-4 text-muted-foreground text-lg leading-relaxed">
-            Desde la velación hasta la cremación o el Parque Memorial, ofrecemos
-            servicios pensados para honrar la memoria de tus seres queridos con
-            respeto y profesionalismo.
+          <p className="mt-4 text-[15px] sm:text-base text-muted-foreground leading-relaxed">
+            Desde la atención inmediata en momentos de pérdida hasta la
+            planificación anticipada de pre-arreglos, ofrecemos un servicio
+            integral con la dignidad y el respeto que su familia merece.
           </p>
         </div>
 
-        <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {services.map((service) => {
-            const Icon = iconMap[service.icon] ?? Building2;
+        <div className="mt-12 grid gap-6 md:grid-cols-3">
+          {services.map((s) => {
+            const Icon = iconMap[s.icon] ?? Building2;
             return (
-              <Card
-                key={service.id}
-                className="group transition-all hover:shadow-md hover:-translate-y-0.5 border-border/60"
+              <article
+                key={s.id}
+                className="group bg-card border border-border/80 rounded-sm p-8 transition-all hover:border-gold hover:shadow-sm"
               >
-                <CardHeader>
-                  <div className="flex h-11 w-11 items-center justify-center rounded-lg bg-primary/10 text-primary transition-colors group-hover:bg-primary group-hover:text-primary-foreground">
-                    <Icon className="h-5 w-5" aria-hidden="true" />
-                  </div>
-                  <CardTitle className="mt-3 font-serif text-xl">
-                    {service.title}
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-sm text-muted-foreground leading-relaxed">
-                    {service.description}
-                  </p>
-                </CardContent>
-              </Card>
+                <div className="flex h-14 w-14 items-center justify-center rounded-full border border-gold/40 text-gold transition-colors group-hover:bg-gold group-hover:text-black">
+                  <Icon className="h-7 w-7" aria-hidden="true" />
+                </div>
+                <h3 className="mt-5 font-serif text-xl font-semibold text-foreground">
+                  {s.title}
+                </h3>
+                <p className="mt-3 text-sm text-muted-foreground leading-relaxed">
+                  {s.description}
+                </p>
+              </article>
             );
           })}
         </div>

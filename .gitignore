@@ -60,3 +60,7 @@ server.log
 # zscripts runtime
 .zscripts/dev.pid
 .zscripts/dev.log
+# Boceto frames (extracted from uploaded video, not source artifacts)
+/frames/
+/upload/
+/worklog.md

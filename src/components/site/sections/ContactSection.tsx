@@ -1,138 +1,99 @@
-import { Phone, Mail, MapPin, Clock } from "lucide-react";
+import { Phone, MapPin, Clock } from "lucide-react";
 import { siteConfig } from "@/lib/site-config";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
 
 export function ContactSection() {
-  const items = [
-    {
-      icon: Phone,
-      label: "Teléfono",
-      value: siteConfig.phone,
-      href: siteConfig.phoneHref,
-    },
-    {
-      icon: Mail,
-      label: "Email",
-      value: siteConfig.email,
-      href: siteConfig.emailHref,
-    },
-    {
-      icon: MapPin,
-      label: "Dirección",
-      value: siteConfig.address,
-      href: `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
-        siteConfig.address
-      )}`,
-    },
-    {
-      icon: Clock,
-      label: "Disponibilidad",
-      value: siteConfig.hours,
-    },
-  ];
-
   return (
-    <section id="contacto" className="py-20 sm:py-24 bg-secondary/40 border-t border-border" aria-labelledby="contact-heading">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="grid lg:grid-cols-2 gap-12 items-start">
-          <div>
-            <span className="text-xs font-semibold uppercase tracking-[0.18em] text-primary">
-              Contacto
-            </span>
-            <h2
-              id="contact-heading"
-              className="mt-3 font-serif text-3xl sm:text-4xl font-semibold tracking-tight"
-            >
-              Estamos disponibles cuando nos necesites
-            </h2>
-            <p className="mt-4 text-muted-foreground text-lg leading-relaxed">
-              Nuestro equipo está disponible 24 horas, los 7 días de la semana.
-              Llámanos o escríbenos por WhatsApp para atención inmediata, o
-              agenda una visita al Parque Memorial.
-            </p>
+    <section
+      id="contacto"
+      aria-labelledby="contacto-heading"
+      className="bg-background border-t border-border/60"
+    >
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16 sm:py-20">
+        <div className="text-center max-w-2xl mx-auto mb-12">
+          <p className="section-divider text-[11px] font-semibold uppercase tracking-[0.3em] text-gold">
+            Contacto
+          </p>
+          <h2
+            id="contacto-heading"
+            className="mt-4 font-serif text-3xl sm:text-4xl font-semibold text-foreground"
+          >
+            Estamos a su lado, siempre
+          </h2>
+          <p className="mt-4 text-[15px] sm:text-base text-muted-foreground leading-relaxed">
+            Visítenos en nuestra sede o llámenos a cualquier hora. Servicio
+            disponible 24 horas, los 365 días del año.
+          </p>
+        </div>
 
-            <div className="mt-8 grid sm:grid-cols-2 gap-3">
-              {items.map((item) => {
-                const Icon = item.icon;
-                const content = (
-                  <div className="flex items-start gap-3">
-                    <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary">
-                      <Icon className="h-5 w-5" aria-hidden="true" />
-                    </div>
-                    <div className="min-w-0">
-                      <p className="text-xs uppercase tracking-wider text-muted-foreground">
-                        {item.label}
-                      </p>
-                      <p className="text-sm font-medium mt-0.5 break-words">
-                        {item.value}
-                      </p>
-                    </div>
-                  </div>
-                );
-                return item.href ? (
-                  <a
-                    key={item.label}
-                    href={item.href}
-                    target={item.href.startsWith("http") ? "_blank" : undefined}
-                    rel={item.href.startsWith("http") ? "noopener noreferrer" : undefined}
-                    className="block rounded-xl border border-border bg-card p-4 transition-colors hover:border-primary/30 hover:bg-secondary"
-                  >
-                    {content}
-                  </a>
-                ) : (
-                  <Card key={item.label} className="p-4 border-border bg-card">
-                    <CardContent className="p-0">{content}</CardContent>
-                  </Card>
-                );
-              })}
-            </div>
-
-            <div className="mt-8 flex flex-col sm:flex-row gap-3">
-              <Button asChild size="lg">
-                <a href={siteConfig.phoneHref}>
-                  <Phone className="mr-2 h-4 w-4" />
-                  Llamar ahora
-                </a>
-              </Button>
-              <Button asChild size="lg" variant="outline">
-                <a
-                  href={siteConfig.whatsappHref}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  WhatsApp
-                </a>
-              </Button>
-            </div>
+        <div className="grid lg:grid-cols-3 gap-6">
+          {/* Mapa */}
+          <div className="lg:col-span-2 bg-card border border-border rounded-sm overflow-hidden">
+            <iframe
+              title="Ubicación de Funeraria Romana en La Romana"
+              src="https://www.openstreetmap.org/export/embed.html?bbox=-69.0480%2C18.4200%2C-69.0280%2C18.4320&layer=mapnik&marker=18.4260%2C-69.0380"
+              className="w-full h-[400px] lg:h-full min-h-[400px] border-0"
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+            />
           </div>
 
-          <div className="rounded-2xl border border-border bg-card p-8 shadow-sm">
-            <h3 className="font-serif text-2xl font-semibold">
-              Aparta tu lugar en el Parque Memorial
+          {/* Caja de emergencia */}
+          <aside className="bg-noir text-white p-8 rounded-sm flex flex-col">
+            <p className="text-[11px] font-semibold uppercase tracking-[0.3em] text-gold">
+              Línea de emergencia
+            </p>
+            <h3 className="mt-3 font-serif text-2xl font-semibold">
+              Atención inmediata
             </h3>
-            <p className="mt-3 text-muted-foreground">
-              Reservas abiertas para Fase 1 (nichos verticales). Nuestros
-              asesores te ayudarán a elegir la opción ideal para tu familia,
-              con planes de pago flexibles y sin compromiso.
+            <p className="mt-3 text-sm text-white/75 leading-relaxed">
+              Si necesita atención inmediata, no dude en llamarnos a cualquier
+              hora del día o de la noche.
             </p>
-            <ul className="mt-6 space-y-3 text-sm">
-              {[
-                "Asesoría gratuita y sin compromiso",
-                "Planes de pago personalizados",
-                "Visita guiada al sitio disponible",
-                "Mantenimiento permanente incluido",
-              ].map((item) => (
-                <li key={item} className="flex items-start gap-2.5">
-                  <span className="mt-1.5 h-1.5 w-1.5 rounded-full bg-primary shrink-0" aria-hidden="true" />
-                  <span>{item}</span>
-                </li>
-              ))}
-            </ul>
-            <Button asChild className="mt-7 w-full" size="lg">
-              <a href="/parque-memorial#reservar">Reservar ahora</a>
-            </Button>
-          </div>
+
+            <a
+              href={siteConfig.emergencyHref}
+              className="mt-6 flex items-center justify-center gap-2 bg-gold text-black font-semibold text-lg py-3 rounded-sm hover:bg-gold/90 transition-colors"
+            >
+              <Phone className="h-5 w-5" />
+              {siteConfig.emergencyPhone}
+            </a>
+
+            <div className="mt-8 space-y-5 pt-6 border-t border-white/10">
+              <div className="flex gap-3">
+                <MapPin className="mt-0.5 h-5 w-5 shrink-0 text-gold" aria-hidden="true" />
+                <div>
+                  <p className="text-xs uppercase tracking-wider text-white/60">
+                    Dirección
+                  </p>
+                  <p className="mt-1 text-sm text-white/90 leading-relaxed">
+                    {siteConfig.address}
+                  </p>
+                </div>
+              </div>
+              <div className="flex gap-3">
+                <Clock className="mt-0.5 h-5 w-5 shrink-0 text-gold" aria-hidden="true" />
+                <div>
+                  <p className="text-xs uppercase tracking-wider text-white/60">
+                    Horario
+                  </p>
+                  <p className="mt-1 text-sm text-white/90 leading-relaxed">
+                    {siteConfig.hours}
+                  </p>
+                </div>
+              </div>
+              <div className="flex gap-3">
+                <Phone className="mt-0.5 h-5 w-5 shrink-0 text-gold" aria-hidden="true" />
+                <div>
+                  <p className="text-xs uppercase tracking-wider text-white/60">
+                    WhatsApp
+                  </p>
+                  <p className="mt-1 text-sm text-white/90">
+                    {siteConfig.whatsapp}
+                  </p>
+                </div>
+              </div>
+            </div>
+          </aside>
         </div>
       </div>
     </section>

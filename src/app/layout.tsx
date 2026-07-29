@@ -4,6 +4,8 @@ import "./globals.css";
 import { Toaster } from "@/components/ui/toaster";
 import { SiteHeader } from "@/components/site/SiteHeader";
 import { SiteFooter } from "@/components/site/SiteFooter";
+import { FloatingWhatsApp } from "@/components/site/FloatingWhatsApp";
+import { siteConfig } from "@/lib/site-config";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -21,44 +23,45 @@ const playfair = Playfair_Display({
   weight: ["400", "500", "600", "700"],
 });
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://parque-memorial.vercel.app";
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://funeraria-romana.vercel.app";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: "Funeraria & Parque Memorial — Servicios Funerarios en La Romana",
-    template: "%s | Funeraria & Parque Memorial",
+    default: "Funeraria Romana — La Funeraria del Pueblo · La Romana, RD",
+    template: "%s | Funeraria Romana",
   },
   description:
-    "Servicios funerarios integrales en La Romana, República Dominicana. Sala de velación, capillas privadas, cremación y Parque Memorial con nichos, parcelas y mausoleo familiar.",
+    "Servicios funerarios en La Romana, República Dominicana. Velatorio, pre-arreglos, cremación, traslados nacionales e internacionales. 24 horas, 365 días.",
   keywords: [
     "funeraria La Romana",
-    "parque memorial",
-    "cementerio La Romana",
+    "funeraria Romana",
     "servicios funerarios",
+    "velatorio La Romana",
     "cremación",
-    "nichos",
-    "mausoleo familiar",
+    "pre-arreglos funerarios",
+    "traslados a Haití",
+    "planes funerarios",
     "República Dominicana",
   ],
-  authors: [{ name: "Parque Memorial" }],
+  authors: [{ name: "Funeraria Romana" }],
   icons: {
     icon: "/logo.svg",
   },
   openGraph: {
-    title: "Funeraria & Parque Memorial — Servicios en La Romana",
+    title: "Funeraria Romana — La Funeraria del Pueblo",
     description:
-      "Servicios funerarios integrales y Parque Memorial en La Romana, RD.",
+      "Servicios funerarios en La Romana, RD. Velatorio, pre-arreglos, cremación y traslados. 24 horas, 365 días.",
     url: siteUrl,
-    siteName: "Parque Memorial",
+    siteName: "Funeraria Romana",
     type: "website",
     locale: "es_DO",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Funeraria & Parque Memorial",
+    title: "Funeraria Romana",
     description:
-      "Servicios funerarios integrales y Parque Memorial en La Romana, RD.",
+      "Servicios funerarios en La Romana, RD. 24 horas, 365 días.",
   },
 };
 
@@ -73,8 +76,16 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} ${playfair.variable} antialiased bg-background text-foreground min-h-screen flex flex-col`}
       >
         <SiteHeader />
+        {/* Barra de dirección bajo header */}
+        <div className="bg-noir-deep text-white/70 text-center text-xs py-2 px-4 border-b border-white/10">
+          <p className="font-medium tracking-wide">
+            {siteConfig.address} ·{" "}
+            <span className="text-gold">{siteConfig.hoursShort}</span>
+          </p>
+        </div>
         <main className="flex-1">{children}</main>
         <SiteFooter />
+        <FloatingWhatsApp />
         <Toaster />
       </body>
     </html>

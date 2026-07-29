@@ -1,113 +1,95 @@
 import Link from "next/link";
-import { ArrowRight, MapPin, Clock, TreePine, Building2, HardHat } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
+import { Bell, ChevronRight, Check } from "lucide-react";
+
+const features = [
+  "8,000 nichos verticales + 2,000 parcelas",
+  "Capilla ecuménica y mausoleos familiares",
+  "Crematorio ecológico (Fase 2)",
+  "Seguridad 24/7 y mantenimiento permanente",
+];
 
 export function CementerioProntoSection() {
   return (
     <section
-      id="parque-memorial"
-      className="relative isolate overflow-hidden py-20 sm:py-24 border-y border-border bg-secondary/40"
-      aria-labelledby="cementerio-heading"
+      aria-labelledby="pronto-heading"
+      className="bg-noir text-white"
     >
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
-          {/* Columna izquierda - contenido */}
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16 sm:py-20">
+        <div className="grid lg:grid-cols-2 gap-10 items-center">
+          {/* Texto */}
           <div>
-            <Badge variant="outline" className="bg-background">
-              <HardHat className="mr-1.5 h-3 w-3" aria-hidden="true" />
-              Proyecto en desarrollo
-            </Badge>
+            <div className="flex items-center gap-3 mb-5">
+              <div className="flex h-10 w-10 items-center justify-center rounded-full border border-gold/50 text-gold">
+                <Bell className="h-5 w-5" aria-hidden="true" />
+              </div>
+              <span className="text-[11px] font-semibold uppercase tracking-[0.3em] text-gold">
+                Próximamente
+              </span>
+            </div>
             <h2
-              id="cementerio-heading"
-              className="mt-4 font-serif text-3xl sm:text-4xl lg:text-5xl font-semibold tracking-tight"
+              id="pronto-heading"
+              className="font-serif text-3xl sm:text-4xl font-semibold leading-tight"
             >
-              Parque Memorial: un nuevo espacio, próximamente
+              Parque Memorial Romana
             </h2>
-            <p className="mt-5 text-lg text-muted-foreground leading-relaxed">
-              Estamos desarrollando un nuevo Parque Memorial en La Romana:
-              nichos verticales, parcelas tradicionales, mausoleo familiar y
-              un jardín memorial, en un entorno natural diseñado para el
-              recogimiento. <strong className="text-foreground">Aún no está
-              inaugurado</strong>, pero las reservas ya están abiertas para
-              familias que quieran apartar su lugar con anticipación.
+            <p className="mt-5 text-[15px] sm:text-base text-white/75 leading-relaxed">
+              Próximamente abriremos el Parque Memorial Romana, un cementerio
+              moderno desarrollado en alianza con el Ayuntamiento de La Romana
+              bajo modelo APP. Más de 40,000 m² con 8,000 nichos verticales,
+              2,000 parcelas tradicionales, capilla ecuménica, jardines
+              memoriales y un crematorio ecológico. Inversión 100% privada,
+              supervisión municipal y 5% de espacios reservados para familias
+              vulnerables.
             </p>
 
-            <ul className="mt-7 space-y-3">
-              {[
-                "Nichos verticales modernos con mantenimiento permanente",
-                "Parcelas tradicionales y mausoleo familiar",
-                "Jardín memorial para cenizas",
-                "Capilla ecuménica, cafetería y estacionamiento amplio",
-              ].map((item) => (
-                <li key={item} className="flex items-start gap-3">
-                  <TreePine className="mt-0.5 h-5 w-5 shrink-0 text-primary" aria-hidden="true" />
-                  <span className="text-sm sm:text-base">{item}</span>
+            <ul className="mt-7 grid sm:grid-cols-2 gap-3">
+              {features.map((f) => (
+                <li key={f} className="flex gap-2.5 text-sm text-white/85">
+                  <Check className="mt-0.5 h-4 w-4 shrink-0 text-gold" aria-hidden="true" />
+                  <span>{f}</span>
                 </li>
               ))}
             </ul>
 
-            <div className="mt-9 flex flex-col sm:flex-row gap-3">
-              <Button asChild size="lg">
-                <Link href="/parque-memorial">
-                  Conoce más del proyecto
-                  <ArrowRight className="ml-2 h-4 w-4" />
-                </Link>
-              </Button>
-              <Button asChild size="lg" variant="outline">
-                <Link href="/parque-memorial#reservar">Apartar mi lugar</Link>
-              </Button>
+            <div className="mt-8">
+              <Link
+                href="/parque-memorial"
+                className="inline-flex items-center gap-2 text-gold font-semibold text-base hover:gap-3 transition-all"
+              >
+                Quiero enterarme primero
+                <ChevronRight className="h-5 w-5" />
+              </Link>
             </div>
           </div>
 
-          {/* Columna derecha - tarjeta resumen */}
-          <div className="lg:pl-8">
-            <div className="rounded-2xl border border-border bg-card p-7 shadow-sm">
-              <div className="flex items-center gap-3 mb-5">
-                <div className="flex h-12 w-12 items-center justify-center rounded-full bg-primary/10 text-primary">
-                  <MapPin className="h-6 w-6" aria-hidden="true" />
-                </div>
-                <div>
-                  <p className="text-xs uppercase tracking-wider text-muted-foreground">Ubicación</p>
-                  <p className="font-serif text-base font-semibold">
-                    Carretera La Romana - Higüeral
-                  </p>
-                </div>
-              </div>
-
-              <dl className="space-y-3.5 border-t border-border pt-5">
-                <div className="flex justify-between items-baseline gap-3">
-                  <dt className="text-sm text-muted-foreground">Fase 1</dt>
-                  <dd className="text-sm font-medium text-right">Nichos verticales · 200 unidades</dd>
-                </div>
-                <div className="flex justify-between items-baseline gap-3">
-                  <dt className="text-sm text-muted-foreground">Fase 2</dt>
-                  <dd className="text-sm font-medium text-right">Parcelas + Mausoleo familiar</dd>
-                </div>
-                <div className="flex justify-between items-baseline gap-3">
-                  <dt className="text-sm text-muted-foreground">Superficie total</dt>
-                  <dd className="text-sm font-medium">12,000 m²</dd>
-                </div>
-                <div className="flex justify-between items-baseline gap-3">
-                  <dt className="text-sm text-muted-foreground">Estado</dt>
-                  <dd className="text-sm font-medium text-primary">En construcción</dd>
-                </div>
-              </dl>
-
-              <div className="mt-5 pt-5 border-t border-border flex items-start gap-2.5">
-                <Clock className="mt-0.5 h-4 w-4 shrink-0 text-primary" aria-hidden="true" />
-                <p className="text-sm text-muted-foreground">
-                  Reservas con planes de pago flexibles. Aparta tu lugar sin
-                  compromiso mientras se completa la obra.
+          {/* Tarjeta lateral */}
+          <aside className="bg-noir-deep border border-white/10 p-8 rounded-sm">
+            <div className="space-y-6">
+              <div>
+                <p className="text-xs uppercase tracking-[0.2em] text-gold/80">Ubicación</p>
+                <p className="mt-1 font-serif text-lg">
+                  Carretera La Romana – Higüey
                 </p>
               </div>
-
-              <div className="mt-5 flex items-center gap-2 text-xs text-muted-foreground">
-                <Building2 className="h-3.5 w-3.5" aria-hidden="true" />
-                <span>Servicios funerarios operando normalmente en La Romana</span>
+              <div className="h-px bg-white/10" />
+              <div>
+                <p className="text-xs uppercase tracking-[0.2em] text-gold/80">Extensión</p>
+                <p className="mt-1 font-serif text-lg">Más de 40,000 m²</p>
+              </div>
+              <div className="h-px bg-white/10" />
+              <div>
+                <p className="text-xs uppercase tracking-[0.2em] text-gold/80">Fase actual</p>
+                <p className="mt-1 font-serif text-lg">
+                  Proyecto en aprobación final
+                </p>
+              </div>
+              <div className="h-px bg-white/10" />
+              <div>
+                <p className="text-xs uppercase tracking-[0.2em] text-gold/80">Concesión</p>
+                <p className="mt-1 font-serif text-lg">25 años · APP municipal</p>
               </div>
             </div>
-          </div>
+          </aside>
         </div>
       </div>
     </section>
