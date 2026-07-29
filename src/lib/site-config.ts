@@ -220,40 +220,189 @@ export const obituaries: Obituary[] = [
 ];
 
 // Blog
+export type ArticleSection = {
+  heading: string;
+  paragraphs: string[];
+  bullets?: string[];
+};
+
 export type Article = {
   id: string;
+  slug: string;
   category: string;
   title: string;
   excerpt: string;
   readTime: string;
+  publishedAt: string; // ISO date string
+  author: string;
+  coverImage: string;
+  intro: string;
+  sections: ArticleSection[];
+  conclusion?: string;
 };
 
 export const articles: Article[] = [
   {
     id: "1",
+    slug: "pre-arreglos-funerarios-decision-serena",
     category: "Guías prácticas",
     title: "Pre-arreglos funerarios: una decisión serena y responsable",
     excerpt:
       "Por qué planificar tu propio servicio funerario es un acto de amor hacia tu familia y cómo hacerlo sin estrés.",
     readTime: "5 min",
+    publishedAt: "2026-07-15",
+    author: "Equipo Funeraria Romana",
+    coverImage:
+      "https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=1400&q=80",
+    intro:
+      "Hablar de la propia despedida no es fácil. Sin embargo, decidir con anticipación cómo queremos ser honrados es uno de los actos más amorosos que podemos hacer por quienes nos acompañan. En este artículo explicamos qué son los pre-arreglos funerarios, por qué congelan el precio contra la inflación y cómo dar el primer paso sin presión.",
+    sections: [
+      {
+        heading: "¿Qué es un pre-arreglo funerario?",
+        paragraphs: [
+          "Un pre-arreglo funerario es un acuerdo previo entre una persona y la funeraria, en el que se definen con calma todos los detalles del servicio que se prestará el día de mañana: tipo de ataúd o urna, sala de velación, ceremonia, traslado, música, esquelas, recordatorios y más. La funeraria documenta todo por escrito y la familia solo necesita llamar el día del fallecimiento para activar el servicio.",
+          "A diferencia de un servicio contratado en el momento del duelo, el pre-arreglo permite tomar decisiones sin urgencia, comparar opciones con calma y evitar que los familiares tengan que adivinar qué habría querido el ser querido. Es, en esencia, dejar todo listo para que el día más difícil sea también el más sereno.",
+        ],
+      },
+      {
+        heading: "Beneficios concretos para tu familia",
+        paragraphs: [
+          "Los pre-arreglos no son solo un asunto emocional; también tienen beneficios económicos y prácticos muy concretos. Estos son los más importantes que debes conocer antes de decidir:",
+        ],
+        bullets: [
+          "Precio congelado a perpetuidad: lo que acuerdas hoy es lo que pagas, sin importar cuánto suba la inflación.",
+          "Planes transferibles: si las circunstancias cambian, puedes reasignar el plan a otro miembro de la familia.",
+          "Financiación flexible: pagos en cuotas cómodas que se ajustan a tu presupuesto.",
+          "Sin costo de consulta: la asesoría es gratuita y sin compromiso de contratación.",
+          "Tres niveles disponibles (GOLD, ROYAL y básicos) para distintos presupuestos y deseos.",
+        ],
+      },
+      {
+        heading: "Cómo dar el primer paso",
+        paragraphs: [
+          "El proceso es más sencillo de lo que imaginas. Lo ideal es agendar una asesoría sin compromiso, donde conversamos sobre tus deseos, te explicamos las opciones y respondemos todas tus preguntas. No se requiere ningún pago inicial para esta primera conversación.",
+          "Una vez que decidas avanzar, documentamos cada detalle en un acuerdo claro y transparente. Tú conservas una copia, la familia puede estar informada si así lo deseas, y nosotros nos encargamos de mantener todo archivado y disponible para cuando se necesite, sin importar si eso ocurre en dos meses o en veinte años.",
+        ],
+      },
+    ],
+    conclusion:
+      "Un pre-arreglo funerario no es anticipar la tristeza; es todo lo contrario: es quitarle peso del corazón a quienes más amas. Si deseas conversar sobre tus opciones, nuestro equipo está disponible 24 horas para asesorarte con calma y sin compromiso.",
   },
   {
     id: "2",
+    slug: "ritos-de-despedida-como-personalizarlos",
     category: "Espiritualidad",
     title: "Ritos de despedida: por qué son importantes y cómo personalizarlos",
     excerpt:
       "El ser humano ha necesitado siempre rituales para despedir a sus muertos. Entiende por qué son sanadores y cómo hacerlos únicos.",
     readTime: "7 min",
+    publishedAt: "2026-07-08",
+    author: "Equipo Funeraria Romana",
+    coverImage:
+      "https://images.unsplash.com/photo-1543429776-2782fc8e1acd?auto=format&fit=crop&w=1400&q=80",
+    intro:
+      "Desde los albores de la humanidad, las comunidades han honrado a sus difuntos con rituales. No importa la cultura ni la época: el ser humano necesita despedirse. En este artículo exploramos por qué los ritos funerarios son sanadores y cómo personalizarlos para que honren de verdad la vida de quien partió.",
+    sections: [
+      {
+        heading: "La función sanadora del ritual",
+        paragraphs: [
+          "Un rito funerario no es solo una formalidad. Es el espacio simbólico donde la familia y la comunidad se reúnen para reconocer que algo importante ha terminado, para compartir el peso del dolor y para comenzar, juntos, el camino del duelo. Estudios de psicología del duelo coinciden en que los rituales estructurados ayudan a procesar la pérdida de manera más sana que el silencio o la negación.",
+          "Cuando hay un lugar, un horario y una manera esperada de honrar al ser querido, el cerebro encuentra anclas. Sabe qué hacer, qué decir, dónde estar. Esa estructura, aparentemente pequeña, es lo que permite que las emociones fluyan sin desbordarse. Por eso, aún hoy, en una sociedad cada vez más secular, los ritos funerarios siguen siendo universales.",
+        ],
+      },
+      {
+        heading: "Elementos que puedes personalizar",
+        paragraphs: [
+          "Cada vida es única y la despedida debería reflejarla. Atrás quedó el tiempo en que todos los servicios eran idénticos: hoy es posible —y recomendable— personalizar cada detalle. Estos son los elementos que más se adaptan a la historia y los deseos del difunto:",
+        ],
+        bullets: [
+          "Música: canciones favoritas, himnos religiosos, piezas clásicas o melodías que marcaron su vida.",
+          "Arreglos florales: con flores significativas, colores favoritos o temáticas especiales.",
+          "Esquelas y programas: con textos, poemas, fotos y citas que reflejen su personalidad.",
+          "Ceremonia: religiosa, ecuménica, laica o mixta; con sacerdote, pastor, oficiante o un ser querido.",
+          "Recordatorios: llaves, estampas, libritos, semillas de árbol o cualquier objeto que la familia quiera regalar.",
+          "Discurso: intervención de familiares, amigos o compañeros de trabajo que compartieron su vida.",
+        ],
+      },
+      {
+        heading: "Cómo conversarlo con la familia",
+        paragraphs: [
+          "Personalizar una despedida requiere conversar antes, no después. Si el ser querido aún está vivo, pregúntale qué le gustaría. Es un diálogo difícil pero profundamente sanador: muchas personas se sienten aliviadas al poder expresar sus deseos y saber que serán respetados. Si ya partió, reúne a la familia en un espacio tranquilo y compartan recuerdos: de ahí surgirán los detalles que harán la ceremonia auténtica.",
+          "Nuestro equipo en Funeraria Romana está entrenado para guiar esta conversación con sensibilidad. No imponemos un guion; ayudamos a encontrar el que corresponde a cada familia. Ya sea una misa tradicional, una ceremonia laica con canciones favoritas o un servicio íntimo en capilla privada, lo importante es que la despedida sea verdaderamente suya.",
+        ],
+      },
+    ],
+    conclusion:
+      "Los ritos de despedida son el último regalo que hacemos a quien partió y el primer paso del duelo para quienes se quedan. Personalizarlos no es un lujo: es una manera de honrar una vida que merece ser recordada a su manera.",
   },
   {
     id: "3",
+    slug: "tramites-legales-fallecimiento-republica-dominicana",
     category: "Trámites legales",
     title: "Trámites legales tras un fallecimiento en República Dominicana",
     excerpt:
       "Una guía clara de los documentos y gestiones necesarias cuando ocurre un fallecimiento, en hospitales, hogares y vías públicas.",
     readTime: "8 min",
+    publishedAt: "2026-07-01",
+    author: "Equipo Funeraria Romana",
+    coverImage:
+      "https://images.unsplash.com/photo-1589829545856-d10d557cf95f?auto=format&fit=crop&w=1400&q=80",
+    intro:
+      "Cuando ocurre un fallecimiento, además del dolor emocional, surge una serie de trámites legales que deben cumplirse en plazos específicos. Conocerlos con anticipación evita contratiempos y permite enfocarse en lo realmente importante: despedir al ser querido. Esta guía resume los documentos y gestiones esenciales en República Dominicana.",
+    sections: [
+      {
+        heading: "El acta de defunción",
+        paragraphs: [
+          "El documento central tras cualquier fallecimiento es el acta (o certificado) de defunción. La emite un médico certificado o, en algunos casos, una autoridad competente como el fiscal. Sin este documento no puede iniciarse ningún trámite funerario ni civil. Por eso, lo primero que debe hacerse —en hospital, hogar o vía pública— es conseguir que un profesional autorizado lo firme.",
+          "El acta debe contener la fecha, hora y causa del fallecimiento, además de los datos de identificación del difunto. Con ella en mano, la funeraria puede proceder con el traslado, la velación y, eventualmente, la inhumación o cremación. La oficina del Registro Civil correspondiente es la encargada de inscribir la defunción y emitir copias certificadas para los demás trámites.",
+        ],
+      },
+      {
+        heading: "Según el lugar del fallecimiento",
+        paragraphs: [
+          "El procedimiento varía dependiendo de dónde ocurrió el deceso. Conocer la diferencia evita confusiones y demoras:",
+        ],
+        bullets: [
+          "En hospital: el personal médico emite el certificado de defunción. La funeraria coordina el traslado directamente con el centro.",
+          "En el hogar: se debe llamar a un médico para que certifique el deceso. Si el fallecimiento fue natural y esperado, el proceso es sencillo; si hubo dudas, puede requerirse intervención del médico legista.",
+          "En vía pública: interviene la autoridad competente (Policía Nacional, fiscal o médico legista) y se levanta un acta. Hasta que se autorice, el cuerpo no puede ser trasladado.",
+          "Traslado internacional: se requieren permisos adicionales del consulado, certificados sanitarios y, en algunos casos, embalsamamiento.",
+        ],
+      },
+      {
+        heading: "Otros documentos y gestiones posteriores",
+        paragraphs: [
+          "Una vez asegurada la defunción y el servicio funerario, quedan gestiones civiles que la familia deberá completar en los días y semanas siguientes. Aunque no son urgentes el mismo día, conviene tenerlas presentes para evitar olvidos que después complican la herencia o los beneficios.",
+        ],
+        bullets: [
+          "Inscripción de la defunción en el Registro Civil (la funeraria suele ayudar a coordinar).",
+          "Solicitud de copias certificadas del acta: se necesitan para banco, pensión, seguro, herencia y otras gestiones.",
+          "Notificación al empleador, si el difunto trabajaba: para trámites de prestaciones laborales y seguro de vida.",
+          "Notificación a la Tesorería de la Seguridad Social (TSS) para pensión de sobrevivientes.",
+          "Gestiones bancarias: presentación del acta para liberar o transferir cuentas.",
+          "Trámite sucesorio ante un notario público cuando hay bienes.",
+        ],
+      },
+      {
+        heading: "Cómo Funeraria Romana te ayuda",
+        paragraphs: [
+          "Sabemos que en medio del duelo los trámites pueden resultar abrumadores. Por eso, nuestro equipo acompaña a las familias en cada paso: desde la coordinación del certificado de defunción hasta la orientación sobre los trámites civiles posteriores. No tienes que enfrentar este proceso solo.",
+          "Si tienes preguntas específicas sobre tu caso, llámanos al (809) 813-4076 o escríbenos por WhatsApp al (809) 399-4382. Estamos disponibles 24 horas, los 365 días del año, para orientarte sin compromiso.",
+        ],
+      },
+    ],
+    conclusion:
+      "Los trámites legales tras un fallecimiento pueden parecer muchos, pero con la guía adecuada son manejables. Lo más importante es contar con el acta de defunción y dejarse acompañar por profesionales que conozcan el proceso. El resto es tiempo, papel y paciencia; el duelo merece toda tu atención.",
   },
 ];
+
+export function getArticleBySlug(slug: string): Article | undefined {
+  return articles.find((a) => a.slug === slug);
+}
+
+export function getAllArticleSlugs(): string[] {
+  return articles.map((a) => a.slug);
+}
 
 // FAQ
 export type Faq = {
