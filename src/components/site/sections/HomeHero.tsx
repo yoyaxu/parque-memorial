@@ -2,9 +2,6 @@ import Link from "next/link";
 import {
   ChevronRight,
   ChevronDown,
-  Users,
-  Clock,
-  ShieldCheck,
   Phone,
   MapPin,
   Heart,
@@ -16,24 +13,6 @@ import {
 import { Button } from "@/components/ui/button";
 import { siteConfig, services, obituaries } from "@/lib/site-config";
 
-const pillars = [
-  {
-    icon: Users,
-    title: "Comunidad",
-    text: "Conocemos a las familias de La Romana y sus tradiciones.",
-  },
-  {
-    icon: Clock,
-    title: "Disponibilidad",
-    text: "24 horas, 365 días. Cuando nos necesites, estamos ahí.",
-  },
-  {
-    icon: ShieldCheck,
-    title: "Transparencia",
-    text: "Precios claros, sin cargos sorpresa. Lo acordado es lo que pagas.",
-  },
-];
-
 const serviceIconMap: Record<string, typeof Building2> = {
   Building2,
   ClipboardList,
@@ -43,142 +22,112 @@ const serviceIconMap: Record<string, typeof Building2> = {
 export function HomeHero() {
   return (
     <>
-      {/* ===== HERO con foto de fondo — tono charcoal brown + sepia ===== */}
+      {/* ===== HERO con foto de fondo — paisaje al anochecer + overlay carbón ===== */}
       <section
         aria-labelledby="hero-heading"
         className="relative overflow-hidden bg-noir text-white"
-        style={{ backgroundColor: "#2A2520" }}
+        style={{ minHeight: "580px" }}
       >
-        {/* Imagen de fondo con tratamiento sepia + carbón */}
+        {/* Foto de fondo — campo al anochecer, filtro suave para mantener la imagen legible */}
         <div
           className="absolute inset-0 bg-cover bg-center"
           style={{
             backgroundImage:
               "url('https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=2000&q=80')",
-            filter: "sepia(0.45) brightness(0.42) saturate(0.55) contrast(1.05) hue-rotate(-8deg)",
+            filter: "brightness(0.55) saturate(0.8)",
           }}
           aria-hidden="true"
         />
-        {/* Overlay carbón marrón cálido — vertical (más oscuro arriba y abajo) */}
+        {/* Overlay carbón vertical — más oscuro abajo para anclar el contenido */}
         <div
           className="absolute inset-0"
           style={{
             background:
-              "linear-gradient(180deg, rgba(42,37,32,0.92) 0%, rgba(42,37,32,0.68) 50%, rgba(26,22,18,0.96) 100%)",
-          }}
-          aria-hidden="true"
-        />
-        {/* Overlay lateral — oscurece la izquierda para legibilidad del texto */}
-        <div
-          className="absolute inset-0"
-          style={{
-            background:
-              "linear-gradient(90deg, rgba(26,22,18,0.88) 0%, rgba(42,37,32,0.45) 50%, transparent 100%)",
-          }}
-          aria-hidden="true"
-        />
-        {/* Veladura sepia superior — da unidad cromática */}
-        <div
-          className="absolute inset-0 mix-blend-soft-light"
-          style={{
-            background:
-              "linear-gradient(180deg, rgba(184,149,106,0.18) 0%, transparent 60%)",
+              "linear-gradient(180deg, rgba(42,39,36,0.45) 0%, rgba(42,39,36,0.6) 55%, rgba(26,22,18,0.92) 100%)",
           }}
           aria-hidden="true"
         />
 
-        <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-20 sm:py-24 lg:py-32">
-          <div className="grid lg:grid-cols-5 gap-12 lg:gap-16 items-center">
-            {/* Columna izquierda */}
-            <div className="lg:col-span-3 max-w-2xl">
-              <span className="inline-flex items-center rounded-full border border-gold/40 bg-gold/10 px-3 py-1 text-[11px] font-medium uppercase tracking-[0.2em] text-gold-soft">
-                {siteConfig.tagline}
+        <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-20 sm:py-24 lg:py-28">
+          {/* Grid asimétrico 1.3fr / 1fr como en el mock */}
+          <div className="grid lg:grid-cols-[1.3fr_1fr] gap-10 lg:gap-14 items-center">
+            {/* Columna izquierda — copy principal */}
+            <div className="max-w-xl">
+              <span className="inline-flex items-center rounded-full border border-gold-soft/40 bg-gold/10 px-3.5 py-1.5 text-[11px] font-medium uppercase tracking-[0.22em] text-gold-soft">
+                Servicio funerario · La Romana
               </span>
+
               <h1
                 id="hero-heading"
-                className="mt-5 font-serif text-4xl sm:text-5xl lg:text-[3.25rem] font-semibold leading-[1.08] tracking-tight"
+                className="mt-6 font-serif text-4xl sm:text-5xl lg:text-[3.5rem] font-semibold leading-[1.08] tracking-tight"
               >
-                Acompañamos a su familia con{" "}
+                Acompañamos a su familia
+                <br />
                 <span className="text-gold-soft italic font-medium">
-                  respeto y dignidad
+                  con respeto y dignidad
                 </span>
               </h1>
-              <p className="mt-6 text-base sm:text-lg leading-relaxed text-white/80">
-                Servicio funerario en La Romana con cobertura nacional y
-                traslados internacionales a Haití. 24 horas, los 365 días del
-                año, con la cercanía de quienes conocen a cada familia.
+
+              <p className="mt-6 text-base sm:text-lg leading-relaxed text-white/82 max-w-lg">
+                Por más de 7 años, somos{" "}
+                <span className="italic text-white">“La Funeraria del Pueblo”</span>.
+                Cobertura nacional, traslados a Haití y atención disponible 24
+                horas, los 365 días del año.
               </p>
+
               <div className="mt-8 flex flex-col sm:flex-row gap-3">
                 <Button
                   asChild
                   size="lg"
-                  className="bg-gold text-white hover:bg-gold/90"
+                  className="bg-gold text-white hover:bg-gold-soft hover:text-white px-7"
                 >
-                  <a href={siteConfig.phoneHref}>
-                    <Phone className="mr-2 h-4 w-4" />
-                    Llamar ahora · {siteConfig.phone}
+                  <a href="/#contacto">
+                    Solicitar asesoría
                   </a>
                 </Button>
                 <Button
                   asChild
                   size="lg"
                   variant="outline"
-                  className="border-white/30 text-white hover:bg-white/10 hover:text-white"
+                  className="border-white/35 text-white hover:bg-white/10 hover:text-white hover:border-gold-soft px-7"
                 >
-                  <Link href="/servicios">
-                    Ver servicios
+                  <Link href="/planes">
+                    Ver planes
                     <ChevronRight className="ml-2 h-4 w-4" />
                   </Link>
                 </Button>
               </div>
-
-              {/* Pillars inline */}
-              <ul className="mt-10 grid grid-cols-1 sm:grid-cols-3 gap-5">
-                {pillars.map((p) => (
-                  <li key={p.title} className="flex gap-3">
-                    <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-gold/40 text-gold-soft">
-                      <p.icon className="h-4 w-4" aria-hidden="true" />
-                    </div>
-                    <div>
-                      <p className="font-serif text-base font-medium leading-tight">
-                        {p.title}
-                      </p>
-                      <p className="mt-0.5 text-xs text-white/70 leading-relaxed">
-                        {p.text}
-                      </p>
-                    </div>
-                  </li>
-                ))}
-              </ul>
             </div>
 
-            {/* Columna derecha — card de obituarios en vivo */}
-            <div className="lg:col-span-2">
-              <div className="rounded-lg border border-white/15 bg-white/5 backdrop-blur-md p-6">
+            {/* Columna derecha — card glassmorphism con obituarios */}
+            <div>
+              <div className="rounded-[10px] border border-white/12 bg-white/[0.06] backdrop-blur-[14px] p-6 sm:p-7">
                 <div className="flex items-center justify-between pb-4 border-b border-white/10">
-                  <h2 className="font-serif text-lg font-semibold">
+                  <h2 className="font-serif text-xl font-semibold text-white">
                     Obituarios de hoy
                   </h2>
-                  <span className="inline-flex items-center gap-1.5 rounded-sm bg-red-700/20 px-2 py-1 text-[10px] font-bold uppercase tracking-wide text-red-300">
-                    <span className="inline-block h-1.5 w-1.5 rounded-full bg-red-400 animate-pulse" />
+                  <span className="inline-flex items-center gap-1.5 rounded-[3px] bg-gold/15 px-2.5 py-1 text-[10px] font-bold uppercase tracking-[0.1em] text-gold-soft">
+                    <span className="inline-block h-1.5 w-1.5 rounded-full bg-gold-soft animate-pulse" />
                     {obituaries.length} activos
                   </span>
                 </div>
 
-                <ul className="divide-y divide-white/10">
+                <ul className="divide-y divide-white/[0.06]">
                   {obituaries.map((o) => (
-                    <li key={o.id} className="py-3.5 flex gap-3">
-                      <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-gold/40 bg-gold/10 font-serif text-sm text-gold-soft">
+                    <li key={o.id} className="py-3.5 flex gap-3.5">
+                      <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-gold-soft/40 bg-gold/10 font-serif text-base text-gold-soft font-medium">
                         {o.initials}
                       </div>
                       <div className="flex-1 min-w-0">
-                        <p className="text-sm font-medium text-white truncate">
+                        <p className="text-sm font-medium text-white">
                           {o.name}
                         </p>
-                        <p className="text-xs text-white/60 mt-0.5">
+                        <p className="text-xs text-white/60 mt-1 leading-relaxed">
                           {o.location}
                         </p>
-                        <p className="text-xs text-white/60">{o.schedule}</p>
+                        <p className="text-xs text-white/55 mt-0.5">
+                          {o.schedule}
+                        </p>
                       </div>
                     </li>
                   ))}
@@ -186,7 +135,7 @@ export function HomeHero() {
 
                 <Link
                   href="/obituarios"
-                  className="mt-4 flex items-center justify-center gap-1.5 text-xs font-medium uppercase tracking-wider text-gold-soft hover:text-gold transition-colors"
+                  className="mt-5 flex items-center justify-center gap-1.5 text-[11px] font-medium uppercase tracking-[0.12em] text-gold-soft hover:text-gold transition-colors"
                 >
                   Ver todos los obituarios
                   <ChevronRight className="h-3 w-3" />
@@ -196,10 +145,8 @@ export function HomeHero() {
           </div>
         </div>
 
-        {/* Onda inferior */}
-        <div className="relative">
-          <div className="absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-gold/40 to-transparent" />
-        </div>
+        {/* Línea dorada inferior sutil */}
+        <div className="absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-gold/40 to-transparent" />
       </section>
 
       {/* ===== SERVICIOS PRINCIPALES — compacto ===== */}

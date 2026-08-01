@@ -1,0 +1,775 @@
+     1→<!DOCTYPE html>
+     2→<html lang="es">
+     3→<head>
+     4→<meta charset="UTF-8" />
+     5→<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+     6→<title>Mock UX — Funeraria Romana</title>
+     7→<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+     8→<style>
+     9→  :root {
+    10→    --cream-50:  #FAF7F2;
+    11→    --cream-100: #F4EFE6;
+    12→    --cream-200: #EAE2D4;
+    13→    --ink:       #2A2724;
+    14→    --ink-soft:  #5C544B;
+    15→    --muted:     #8A8073;
+    16→    --gold:      #B08D57;
+    17→    --gold-soft: #C9A876;
+    18→    --gold-bg:   rgba(176,141,87,0.08);
+    19→    --line:      rgba(42,39,36,0.10);
+    20→    --white:     #FFFFFF;
+    21→  }
+    22→  * { box-sizing: border-box; margin: 0; padding: 0; }
+    23→  html { scroll-behavior: smooth; }
+    24→  body {
+    25→    font-family: 'Inter', -apple-system, sans-serif;
+    26→    background: var(--cream-50);
+    27→    color: var(--ink);
+    28→    font-size: 15px;
+    29→    line-height: 1.55;
+    30→  }
+    31→  .serif { font-family: 'Cormorant Garamond', serif; }
+    32→
+    33→  /* ============ TOP BAR ============ */
+    34→  .topbar {
+    35→    background: var(--ink);
+    36→    color: var(--cream-100);
+    37→    font-size: 12px;
+    38→    letter-spacing: 0.04em;
+    39→  }
+    40→  .topbar-inner {
+    41→    max-width: 1280px; margin: 0 auto;
+    42→    display: flex; justify-content: space-between; align-items: center;
+    43→    padding: 7px 24px;
+    44→  }
+    45→  .topbar a { color: var(--cream-100); text-decoration: none; opacity: 0.85; transition: opacity .2s; }
+    46→  .topbar a:hover { opacity: 1; color: var(--gold-soft); }
+    47→  .topbar .left, .topbar .right { display: flex; gap: 18px; align-items: center; }
+    48→  .dot { display:inline-block; width:6px; height:6px; border-radius:50%; background: var(--gold-soft); margin-right:6px; }
+    49→
+    50→  /* ============ HEADER (sticky, transparente sobre foto) ============ */
+    51→  .header {
+    52→    position: sticky; top: 0; z-index: 50;
+    53→    background: rgba(250, 247, 242, 0.85);
+    54→    backdrop-filter: blur(12px);
+    55→    -webkit-backdrop-filter: blur(12px);
+    56→    border-bottom: 1px solid var(--line);
+    57→  }
+    58→  .header-inner {
+    59→    max-width: 1280px; margin: 0 auto;
+    60→    display: flex; align-items: center; justify-content: space-between;
+    61→    padding: 14px 24px;
+    62→  }
+    63→  .logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+    64→  .logo-mark {
+    65→    width: 38px; height: 38px; border-radius: 50%;
+    66→    border: 1px solid var(--gold);
+    67→    display: grid; place-items: center;
+    68→    color: var(--gold);
+    69→    background: var(--white);
+    70→  }
+    71→  .logo-mark svg { width: 18px; height: 18px; }
+    72→  .logo-text { display: flex; flex-direction: column; line-height: 1.15; }
+    73→  .logo-text .name { font-family: 'Cormorant Garamond', serif; font-size: 18px; font-weight: 600; color: var(--ink); }
+    74→  .logo-text .tag { font-size: 9px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold); }
+    75→
+    76→  /* ============ NAV (4 items) ============ */
+    77→  .nav { display: flex; align-items: center; gap: 4px; }
+    78→  .nav-item {
+    79→    position: relative;
+    80→    color: var(--ink-soft);
+    81→    text-decoration: none;
+    82→    font-size: 13px;
+    83→    font-weight: 500;
+    84→    letter-spacing: 0.06em;
+    85→    text-transform: uppercase;
+    86→    padding: 10px 14px;
+    87→    border-radius: 4px;
+    88→    transition: color .2s, background .2s;
+    89→    cursor: pointer;
+    90→  }
+    91→  .nav-item:hover { color: var(--gold); background: var(--gold-bg); }
+    92→  .nav-item .chev { font-size: 10px; margin-left: 4px; opacity: 0.5; }
+    93→  .badge-live {
+    94→    display: inline-block;
+    95→    background: #C0392B;
+    96→    color: white;
+    97→    font-size: 9px;
+    98→    font-weight: 700;
+    99→    letter-spacing: 0.06em;
+   100→    padding: 2px 6px;
+   101→    border-radius: 3px;
+   102→    margin-left: 6px;
+   103→    vertical-align: 1px;
+   104→  }
+   105→  .badge-live::before {
+   106→    content: ""; display:inline-block; width:5px; height:5px;
+   107→    border-radius:50%; background: white; margin-right:4px; vertical-align: 1px;
+   108→    animation: pulse 1.5s infinite;
+   109→  }
+   110→  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.3} }
+   111→
+   112→  /* dropdown */
+   113→  .dropdown {
+   114→    position: absolute;
+   115→    top: calc(100% + 6px); left: 0;
+   116→    min-width: 260px;
+   117→    background: var(--white);
+   118→    border: 1px solid var(--line);
+   119→    border-radius: 8px;
+   120→    box-shadow: 0 12px 32px rgba(42,39,36,0.10);
+   121→    padding: 8px;
+   122→    opacity: 0; visibility: hidden; transform: translateY(-4px);
+   123→    transition: all .18s ease;
+   124→  }
+   125→  .nav-item:hover .dropdown,
+   126→  .nav-item:focus-within .dropdown { opacity: 1; visibility: visible; transform: translateY(0); }
+   127→  .dropdown a {
+   128→    display: flex; align-items: center; gap: 10px;
+   129→    padding: 9px 12px;
+   130→    border-radius: 5px;
+   131→    color: var(--ink-soft);
+   132→    text-decoration: none;
+   133→    font-size: 13px;
+   134→    font-weight: 400;
+   135→    letter-spacing: 0;
+   136→    text-transform: none;
+   137→    transition: background .15s, color .15s;
+   138→  }
+   139→  .dropdown a:hover { background: var(--cream-100); color: var(--gold); }
+   140→  .dropdown a .ico { width: 16px; height: 16px; opacity: 0.7; }
+   141→  .dropdown a small { display:block; color: var(--muted); font-size: 11px; margin-top: 1px; }
+   142→
+   143→  /* ============ CTA ============ */
+   144→  .cta-group { display: flex; align-items: center; gap: 10px; }
+   145→  .btn-ghost {
+   146→    display: inline-flex; align-items: center; gap: 6px;
+   147→    padding: 9px 14px;
+   148→    font-size: 12px; font-weight: 500;
+   149→    letter-spacing: 0.08em; text-transform: uppercase;
+   150→    color: var(--ink);
+   151→    background: transparent;
+   152→    border: 1px solid var(--line);
+   153→    border-radius: 4px;
+   154→    text-decoration: none;
+   155→    transition: all .2s;
+   156→  }
+   157→  .btn-ghost:hover { border-color: var(--gold); color: var(--gold); }
+   158→  .btn-cta {
+   159→    display: inline-flex; align-items: center; gap: 8px;
+   160→    padding: 10px 18px;
+   161→    font-size: 13px; font-weight: 600;
+   162→    letter-spacing: 0.06em; text-transform: uppercase;
+   163→    color: var(--white);
+   164→    background: var(--ink);
+   165→    border: 1px solid var(--ink);
+   166→    border-radius: 4px;
+   167→    text-decoration: none;
+   168→    transition: all .2s;
+   169→  }
+   170→  .btn-cta:hover { background: var(--gold); border-color: var(--gold); }
+   171→  .btn-cta svg { width: 14px; height: 14px; }
+   172→
+   173→  /* ============ HERO CON FOTO ============ */
+   174→  .hero {
+   175→    position: relative;
+   176→    min-height: 580px;
+   177→    overflow: hidden;
+   178→    background: var(--ink);
+   179→  }
+   180→  .hero-bg {
+   181→    position: absolute; inset: 0;
+   182→    background-image: url('https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=2000&q=80');
+   183→    background-size: cover;
+   184→    background-position: center;
+   185→    filter: brightness(0.55) saturate(0.8);
+   186→  }
+   187→  .hero-overlay {
+   188→    position: absolute; inset: 0;
+   189→    background: linear-gradient(180deg, rgba(42,39,36,0.4) 0%, rgba(42,39,36,0.6) 60%, rgba(42,39,36,0.85) 100%);
+   190→  }
+   191→  .hero-inner {
+   192→    position: relative; z-index: 1;
+   193→    max-width: 1280px; margin: 0 auto;
+   194→    padding: 80px 24px 70px;
+   195→    color: var(--white);
+   196→    display: grid;
+   197→    grid-template-columns: 1.3fr 1fr;
+   198→    gap: 60px;
+   199→    align-items: center;
+   200→  }
+   201→  .hero-left { max-width: 580px; }
+   202→  .hero-kicker {
+   203→    display: inline-flex; align-items: center; gap: 8px;
+   204→    padding: 6px 14px;
+   205→    background: rgba(176,141,87,0.15);
+   206→    border: 1px solid rgba(201,168,118,0.4);
+   207→    border-radius: 999px;
+   208→    font-size: 11px;
+   209→    letter-spacing: 0.22em;
+   210→    text-transform: uppercase;
+   211→    color: var(--gold-soft);
+   212→    margin-bottom: 24px;
+   213→  }
+   214→  .hero h1 {
+   215→    font-family: 'Cormorant Garamond', serif;
+   216→    font-size: 56px;
+   217→    line-height: 1.08;
+   218→    font-weight: 600;
+   219→    letter-spacing: -0.01em;
+   220→    margin-bottom: 22px;
+   221→  }
+   222→  .hero h1 em {
+   223→    font-style: italic;
+   224→    color: var(--gold-soft);
+   225→    font-weight: 500;
+   226→  }
+   227→  .hero p.lead {
+   228→    font-size: 16px;
+   229→    line-height: 1.7;
+   230→    color: rgba(255,255,255,0.82);
+   231→    margin-bottom: 32px;
+   232→  }
+   233→  .hero-actions { display: flex; gap: 14px; flex-wrap: wrap; }
+   234→  .btn-hero-primary {
+   235→    display: inline-flex; align-items: center; gap: 10px;
+   236→    padding: 14px 26px;
+   237→    background: var(--gold);
+   238→    color: var(--white);
+   239→    border-radius: 4px;
+   240→    text-decoration: none;
+   241→    font-size: 13px;
+   242→    font-weight: 600;
+   243→    letter-spacing: 0.08em;
+   244→    text-transform: uppercase;
+   245→    transition: all .2s;
+   246→  }
+   247→  .btn-hero-primary:hover { background: var(--gold-soft); transform: translateY(-1px); }
+   248→  .btn-hero-secondary {
+   249→    display: inline-flex; align-items: center; gap: 10px;
+   250→    padding: 14px 26px;
+   251→    background: transparent;
+   252→    color: var(--white);
+   253→    border: 1px solid rgba(255,255,255,0.35);
+   254→    border-radius: 4px;
+   255→    text-decoration: none;
+   256→    font-size: 13px;
+   257→    font-weight: 500;
+   258→    letter-spacing: 0.08em;
+   259→    text-transform: uppercase;
+   260→    transition: all .2s;
+   261→  }
+   262→  .btn-hero-secondary:hover { border-color: var(--gold-soft); color: var(--gold-soft); }
+   263→
+   264→  /* hero right — card con obituarios */
+   265→  .hero-card {
+   266→    background: rgba(255,255,255,0.06);
+   267→    backdrop-filter: blur(14px);
+   268→    -webkit-backdrop-filter: blur(14px);
+   269→    border: 1px solid rgba(255,255,255,0.12);
+   270→    border-radius: 10px;
+   271→    padding: 28px;
+   272→  }
+   273→  .hero-card-head {
+   274→    display: flex; align-items: center; justify-content: space-between;
+   275→    padding-bottom: 16px;
+   276→    border-bottom: 1px solid rgba(255,255,255,0.1);
+   277→    margin-bottom: 18px;
+   278→  }
+   279→  .hero-card-head h3 {
+   280→    font-family: 'Cormorant Garamond', serif;
+   281→    font-size: 20px;
+   282→    font-weight: 600;
+   283→    color: var(--white);
+   284→  }
+   285→  .hero-card-head .pill {
+   286→    font-size: 10px;
+   287→    letter-spacing: 0.1em;
+   288→    text-transform: uppercase;
+   289→    color: var(--gold-soft);
+   290→    padding: 3px 8px;
+   291→    background: rgba(176,141,87,0.15);
+   292→    border-radius: 3px;
+   293→  }
+   294→  .obituary {
+   295→    display: flex; gap: 14px; align-items: flex-start;
+   296→    padding: 12px 0;
+   297→    border-bottom: 1px solid rgba(255,255,255,0.06);
+   298→  }
+   299→  .obituary:last-child { border-bottom: none; }
+   300→  .obit-avatar {
+   301→    width: 42px; height: 42px;
+   302→    border-radius: 50%;
+   303→    background: rgba(201,168,118,0.18);
+   304→    border: 1px solid rgba(201,168,118,0.4);
+   305→    display: grid; place-items: center;
+   306→    font-family: 'Cormorant Garamond', serif;
+   307→    font-size: 16px;
+   308→    color: var(--gold-soft);
+   309→    font-weight: 500;
+   310→    flex-shrink: 0;
+   311→  }
+   312→  .obit-info { flex: 1; }
+   313→  .obit-info .name { color: white; font-size: 14px; font-weight: 500; margin-bottom: 2px; }
+   314→  .obit-info .meta { color: rgba(255,255,255,0.6); font-size: 12px; line-height: 1.5; }
+   315→  .hero-card-foot {
+   316→    margin-top: 18px;
+   317→    text-align: center;
+   318→  }
+   319→  .hero-card-foot a {
+   320→    color: var(--gold-soft);
+   321→    font-size: 12px;
+   322→    letter-spacing: 0.1em;
+   323→    text-transform: uppercase;
+   324→    text-decoration: none;
+   325→    font-weight: 500;
+   326→  }
+   327→
+   328→  /* ============ PILLARS ============ */
+   329→  .pillars {
+   330→    background: var(--cream-50);
+   331→    border-bottom: 1px solid var(--line);
+   332→  }
+   333→  .pillars-inner {
+   334→    max-width: 1280px; margin: 0 auto;
+   335→    padding: 50px 24px;
+   336→    display: grid;
+   337→    grid-template-columns: repeat(4, 1fr);
+   338→    gap: 32px;
+   339→  }
+   340→  .pillar { text-align: left; }
+   341→  .pillar .ic {
+   342→    width: 40px; height: 40px;
+   343→    border-radius: 50%;
+   344→    background: var(--gold-bg);
+   345→    color: var(--gold);
+   346→    display: grid; place-items: center;
+   347→    margin-bottom: 14px;
+   348→  }
+   349→  .pillar h4 {
+   350→    font-family: 'Cormorant Garamond', serif;
+   351→    font-size: 19px; font-weight: 600;
+   352→    color: var(--ink);
+   353→    margin-bottom: 6px;
+   354→  }
+   355→  .pillar p {
+   356→    font-size: 13px;
+   357→    color: var(--ink-soft);
+   358→    line-height: 1.55;
+   359→  }
+   360→
+   361→  /* ============ SECCIÓN INFO-ARCH (propuesta de páginas) ============ */
+   362→  .arch {
+   363→    background: var(--white);
+   364→    padding: 70px 24px;
+   365→  }
+   366→  .arch-inner { max-width: 1100px; margin: 0 auto; }
+   367→  .arch h2 {
+   368→    font-family: 'Cormorant Garamond', serif;
+   369→    font-size: 38px;
+   370→    font-weight: 600;
+   371→    text-align: center;
+   372→    margin-bottom: 8px;
+   373→  }
+   374→  .arch .sub {
+   375→    text-align: center;
+   376→    color: var(--muted);
+   377→    font-size: 14px;
+   378→    margin-bottom: 50px;
+   379→  }
+   380→  .arch-grid {
+   381→    display: grid;
+   382→    grid-template-columns: repeat(3, 1fr);
+   383→    gap: 20px;
+   384→  }
+   385→  .arch-card {
+   386→    border: 1px solid var(--line);
+   387→    border-radius: 10px;
+   388→    padding: 22px;
+   389→    background: var(--cream-50);
+   390→  }
+   391→  .arch-card .num {
+   392→    display: inline-block;
+   393→    width: 28px; height: 28px;
+   394→    border-radius: 50%;
+   395→    background: var(--ink);
+   396→    color: var(--cream-100);
+   397→    font-size: 12px;
+   398→    font-weight: 600;
+   399→    display: grid; place-items: center;
+   400→    margin-bottom: 14px;
+   401→  }
+   402→  .arch-card h5 {
+   403→    font-family: 'Cormorant Garamond', serif;
+   404→    font-size: 20px;
+   405→    font-weight: 600;
+   406→    margin-bottom: 8px;
+   407→  }
+   408→  .arch-card ul { list-style: none; }
+   409→  .arch-card li {
+   410→    font-size: 13px;
+   411→    color: var(--ink-soft);
+   412→    padding: 4px 0;
+   413→    padding-left: 16px;
+   414→    position: relative;
+   415→  }
+   416→  .arch-card li::before {
+   417→    content: ""; position: absolute; left: 0; top: 12px;
+   418→    width: 6px; height: 1px;
+   419→    background: var(--gold);
+   420→  }
+   421→  .arch-card .stat {
+   422→    margin-top: 14px;
+   423→    padding-top: 14px;
+   424→    border-top: 1px dashed var(--line);
+   425→    font-size: 11px;
+   426→    color: var(--muted);
+   427→    letter-spacing: 0.06em;
+   428→    text-transform: uppercase;
+   429→  }
+   430→
+   431→  /* comparison: now vs proposed */
+   432→  .compare {
+   433→    display: grid;
+   434→    grid-template-columns: 1fr 1fr;
+   435→    gap: 24px;
+   436→    margin-top: 50px;
+   437→  }
+   438→  .compare-col {
+   439→    border-radius: 10px;
+   440→    padding: 28px;
+   441→  }
+   442→  .compare-col.now { background: #F8EFE9; border: 1px solid rgba(192,57,43,0.15); }
+   443→  .compare-col.next { background: #F1F5EE; border: 1px solid rgba(120,150,80,0.2); }
+   444→  .compare-col h6 {
+   445→    font-size: 11px;
+   446→    letter-spacing: 0.16em;
+   447→    text-transform: uppercase;
+   448→    margin-bottom: 6px;
+   449→    font-weight: 600;
+   450→  }
+   451→  .compare-col.now h6 { color: #C0392B; }
+   452→  .compare-col.next h6 { color: #5E7A3A; }
+   453→  .compare-col .big {
+   454→    font-family: 'Cormorant Garamond', serif;
+   455→    font-size: 32px;
+   456→    font-weight: 600;
+   457→    margin-bottom: 4px;
+   458→  }
+   459→  .compare-col .desc { font-size: 13px; color: var(--ink-soft); }
+   460→
+   461→  /* ============ PALETA ============ */
+   462→  .palette {
+   463→    background: var(--cream-100);
+   464→    padding: 60px 24px;
+   465→  }
+   466→  .palette-inner { max-width: 1100px; margin: 0 auto; }
+   467→  .palette h2 {
+   468→    font-family: 'Cormorant Garamond', serif;
+   469→    font-size: 32px; font-weight: 600;
+   470→    text-align: center;
+   471→    margin-bottom: 40px;
+   472→  }
+   473→  .swatches {
+   474→    display: grid;
+   475→    grid-template-columns: repeat(6, 1fr);
+   476→    gap: 14px;
+   477→  }
+   478→  .sw {
+   479→    border-radius: 8px;
+   480→    overflow: hidden;
+   481→    border: 1px solid var(--line);
+   482→    background: var(--white);
+   483→  }
+   484→  .sw .chip { height: 80px; }
+   485→  .sw .meta { padding: 10px 12px; }
+   486→  .sw .meta .name { font-size: 12px; font-weight: 600; color: var(--ink); }
+   487→  .sw .meta .hex { font-size: 11px; color: var(--muted); font-family: 'Courier New', monospace; }
+   488→
+   489→  /* mobile note */
+   490→  .mobile-note {
+   491→    background: var(--ink);
+   492→    color: var(--cream-100);
+   493→    padding: 30px 24px;
+   494→    text-align: center;
+   495→    font-size: 13px;
+   496→    line-height: 1.7;
+   497→  }
+   498→  .mobile-note strong { color: var(--gold-soft); }
+   499→
+   500→  @media (max-width: 900px) {
+   501→    .nav, .hero-right { display: none; }
+   502→    .hero-inner { grid-template-columns: 1fr; }
+   503→    .pillars-inner, .arch-grid, .swatches, .compare { grid-template-columns: 1fr 1fr; }
+   504→  }
+   505→</style>
+   506→</head>
+   507→<body>
+   508→
+   509→<!-- ============ TOP BAR ============ -->
+   510→<div class="topbar">
+   511→  <div class="topbar-inner">
+   512→    <div class="left">
+   513→      <span><span class="dot"></span>Servicio 24 horas · 365 días</span>
+   514→    </div>
+   515→    <div class="right">
+   516→      <a href="#">Obituarios en vivo</a>
+   517→      <a href="#">Pre-arreglos</a>
+   518→      <a href="#">La Romana, RD</a>
+   519→    </div>
+   520→  </div>
+   521→</div>
+   522→
+   523→<!-- ============ HEADER ============ -->
+   524→<header class="header">
+   525→  <div class="header-inner">
+   526→    <!-- Logo -->
+   527→    <a href="#" class="logo">
+   528→      <span class="logo-mark">
+   529→        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+   530→          <path d="M12 2C9 5 7 8 7 12a5 5 0 0010 0c0-4-2-7-5-10z"/>
+   531→          <path d="M12 22V12"/>
+   532→        </svg>
+   533→      </span>
+   534→      <span class="logo-text">
+   535→        <span class="name">Funeraria Romana</span>
+   536→        <span class="tag">La Funeraria del Pueblo</span>
+   537→      </span>
+   538→    </a>
+   539→
+   540→    <!-- NAV — solo 4 items primarios -->
+   541→    <nav class="nav">
+   542→      <a href="#" class="nav-item">Inicio</a>
+   543→
+   544→      <a href="#" class="nav-item">
+   545→        Servicios <span class="chev">▾</span>
+   546→        <div class="dropdown">
+   547→          <a href="#"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 21h18M5 21V7l7-4 7 4v14"/></svg><div>Velatorio<small>Salas principales y privadas</small></div></a>
+   548→          <a href="#"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2C9 5 7 8 7 12a5 5 0 0010 0c0-4-2-7-5-10z"/></svg><div>Cremación<small>Capilla propia y moderna</small></div></a>
+   549→          <a href="#"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M9 7h6"/></svg><div>Pre-Arreglos<small>Congele el precio hoy</small></div></a>
+   550→          <a href="#"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 12h18M3 12l4-4M3 12l4 4"/></svg><div>Traslados<small>Nacional e internacional</small></div></a>
+   551→          <a href="#"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2l3 6 6 1-4 4 1 7-6-3-6 3 1-7-4-4 6-1z"/></svg><div>Planes GOLD · ROYAL · A</small></div></a>
+   552→        </div>
+   553→      </a>
+   554→
+   555→      <a href="#" class="nav-item">Parque Memorial</a>
+   556→
+   557→      <a href="#" class="nav-item">
+   558→        Recursos <span class="chev">▾</span>
+   559→        <div class="dropdown">
+   560→          <a href="#"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="8" r="4"/><path d="M5 21v-2a7 7 0 0114 0v2"/></svg><div>Obituarios <span class="badge-live">EN VIVO</span></div></a>
+   561→          <a href="#"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 5h16v14H4z"/><path d="M8 9h8M8 13h6"/></svg><div>Blog & Guías</small></div></a>
+   562→          <a href="#"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 2"/></svg><div>Tour 360°</small></div></a>
+   563→          <a href="#"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 6v6l4 2"/><circle cx="12" cy="12" r="10"/></svg><div>Preguntas Frecuentes</small></div></a>
+   564→        </div>
+   565→      </a>
+   566→
+   567→      <a href="#" class="nav-item">Contacto</a>
+   568→    </nav>
+   569→
+   570→    <!-- CTAs -->
+   571→    <div class="cta-group">
+   572→      <a href="#" class="btn-ghost">Tienda</a>
+   573→      <a href="tel:+18098134076" class="btn-cta">
+   574→        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.13.96.36 1.9.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0122 16.92z"/></svg>
+   575→        Llamar 24/7
+   576→      </a>
+   577→    </div>
+   578→  </div>
+   579→</header>
+   580→
+   581→<!-- ============ HERO CON FOTO ============ -->
+   582→<section class="hero">
+   583→  <div class="hero-bg"></div>
+   584→  <div class="hero-overlay"></div>
+   585→  <div class="hero-inner">
+   586→    <div class="hero-left">
+   587→      <span class="hero-kicker">Servicio funerario · La Romana</span>
+   588→      <h1 class="serif">Acompañamos a su familia con <em>respeto y dignidad</em></h1>
+   589→      <p class="lead">
+   590→        Por más de 7 años, somos "La Funeraria del Pueblo". Cobertura nacional,
+   591→        traslados a Haití y atención disponible 24 horas, los 365 días del año.
+   592→      </p>
+   593→      <div class="hero-actions">
+   594→        <a href="#" class="btn-hero-primary">Solicitar asesoría</a>
+   595→        <a href="#" class="btn-hero-secondary">Ver planes →</a>
+   596→      </div>
+   597→    </div>
+   598→
+   599→    <div class="hero-right">
+   600→      <div class="hero-card">
+   601→        <div class="hero-card-head">
+   602→          <h3>Obituarios de hoy</h3>
+   603→          <span class="pill">2 activos</span>
+   604→        </div>
+   605→        <div class="obituary">
+   606→          <div class="obit-avatar">ME</div>
+   607→          <div class="obit-info">
+   608→            <div class="name">María Elena Rodríguez</div>
+   609→            <div class="meta">Sala Principal · Hoy 4:00 PM<br>Capilla La Atarraya</div>
+   610→          </div>
+   611→        </div>
+   612→        <div class="obituary">
+   613→          <div class="obit-avatar">JR</div>
+   614→          <div class="obit-info">
+   615→            <div class="name">José Ramón Feliz</div>
+   616→            <div class="meta">Sala 2 · Hoy 6:00 PM<br>Salida mañana 10:00 AM</div>
+   617→          </div>
+   618→        </div>
+   619→        <div class="hero-card-foot">
+   620→          <a href="#">Ver todos los obituarios →</a>
+   621→        </div>
+   622→      </div>
+   623→    </div>
+   624→  </div>
+   625→</section>
+   626→
+   627→<!-- ============ PILLARS ============ -->
+   628→<section class="pillars">
+   629→  <div class="pillars-inner">
+   630→    <div class="pillar">
+   631→      <div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/></svg></div>
+   632→      <h4>Comunidad</h4>
+   633→      <p>Conocemos a las familias de La Romana y sus tradiciones.</p>
+   634→    </div>
+   635→    <div class="pillar">
+   636→      <div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div>
+   637→      <h4>Disponibilidad</h4>
+   638→      <p>24 horas, 365 días. Cuando nos necesites, estamos ahí.</p>
+   639→    </div>
+   640→    <div class="pillar">
+   641→      <div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2l8 4v6c0 5-3.5 8-8 10-4.5-2-8-5-8-10V6l8-4z"/></svg></div>
+   642→      <h4>Transparencia</h4>
+   643→      <p>Precios claros, sin cargos sorpresa. Lo acordado es lo que pagas.</p>
+   644→    </div>
+   645→    <div class="pillar">
+   646→      <div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 12h18M3 12l4-4M3 12l4 4"/></svg></div>
+   647→      <h4>Cobertura</h4>
+   648→      <p>Nacional completa y traslados internacionales a Haití.</p>
+   649→    </div>
+   650→  </div>
+   651→</section>
+   652→
+   653→<!-- ============ PROPUESTA: dividir home larga ============ -->
+   654→<section class="arch">
+   655→  <div class="arch-inner">
+   656→    <h2 class="serif">Propuesta: dividir la home en páginas enfocadas</h2>
+   657→    <p class="sub">Hoy tienes <strong>13 secciones</strong> en una sola página. El usuario en duelo no debería hacer scroll eterno. Propuesta: home corta + 4 sub-páginas.</p>
+   658→
+   659→    <div class="arch-grid">
+   660→      <div class="arch-card">
+   661→        <span class="num">1</span>
+   662→        <h5 class="serif">Home (corta)</h5>
+   663→        <ul>
+   664→          <li>Hero con foto + obituarios del día</li>
+   665→          <li>3 servicios principales</li>
+   666→          <li>CTA: Llamar / WhatsApp</li>
+   667→          <li>Mini teaser Parque Memorial</li>
+   668→        </ul>
+   669→        <div class="stat">≈ 1 pantalla y media</div>
+   670→      </div>
+   671→
+   672→      <div class="arch-card">
+   673→        <span class="num">2</span>
+   674→        <h5 class="serif">/servicios</h5>
+   675→        <ul>
+   676→          <li>Velatorio, Cremación, Pre-Arreglos</li>
+   677→          <li>Traslados & Cobertura nacional</li>
+   678→          <li>Servicios adicionales</li>
+   679→          <li>Tour 360°</li>
+   680→        </ul>
+   681→        <div class="stat">4 sub-secciones</div>
+   682→      </div>
+   683→
+   684→      <div class="arch-card">
+   685→        <span class="num">3</span>
+   686→        <h5 class="serif">/planes</h5>
+   687→        <ul>
+   688→          <li>GOLD · ROYAL · Plan A</li>
+   689→          <li>Comparativa de features</li>
+   690→          <li>Pre-arreglos y financiación</li>
+   691→          <li>FAQ de precios</li>
+   692→        </ul>
+   693→        <div class="stat">3 planes + tabla</div>
+   694→      </div>
+   695→
+   696→      <div class="arch-card">
+   697→        <span class="num">4</span>
+   698→        <h5 class="serif">/obituarios</h5>
+   699→        <ul>
+   700→          <li>Listado dinámico con filtros</li>
+   701→          <li>Buscar por nombre o fecha</li>
+   702→          <li>Condolencias digitales</li>
+   703→          <li>Compartir en redes</li>
+   704→        </ul>
+   705→        <div class="stat">Página dinámica</div>
+   706→      </div>
+   707→
+   708→      <div class="arch-card">
+   709→        <span class="num">5</span>
+   710→        <h5 class="serif">/tienda <span style="font-size:11px; color: var(--gold); background: var(--gold-bg); padding:2px 6px; border-radius:3px; margin-left:6px;">NUEVO</span></h5>
+   711→        <ul>
+   712→          <li>Coronas y arreglos florales</li>
+   713→          <li>Selección de velatorio destino</li>
+   714→          <li>Urnas, recordatorios, esquelas</li>
+   715→          <li>Pago y entrega coordinada</li>
+   716→        </ul>
+   717→        <div class="stat">Tipo Blandino</div>
+   718→      </div>
+   719→
+   720→      <div class="arch-card">
+   721→        <span class="num">6</span>
+   722→        <h5 class="serif">/parque-memorial</h5>
+   723→        <ul>
+   724→          <li>Ya existe como página propia ✓</li>
+   725→          <li>Galería, fases, ubicación</li>
+   726→          <li>Formulario de interés</li>
+   727→        </ul>
+   728→        <div class="stat">Página dedicada</div>
+   729→      </div>
+   730→    </div>
+   731→
+   732→    <!-- Comparación numérica -->
+   733→    <div class="compare">
+   734→      <div class="compare-col now">
+   735→        <h6>Estado actual</h6>
+   736→        <div class="big">1 página · 13 secciones</div>
+   737→        <p class="desc">≈ 8-10 pantallas de scroll en desktop. Cognitivamente abrumador para usuarios en duelo o con urgencia.</p>
+   738→      </div>
+   739→      <div class="compare-col next">
+   740→        <h6>Propuesta</h6>
+   741→        <div class="big">6 páginas · 2-3 secciones c/u</div>
+   742→        <p class="desc">Home corta + 5 sub-páginas enfocadas. Cada página tiene 1 objetivo claro y menos de 3 pantallas de scroll.</p>
+   743→      </div>
+   744→    </div>
+   745→  </div>
+   746→</section>
+   747→
+   748→<!-- ============ PALETA ============ -->
+   749→<section class="palette">
+   750→  <div class="palette-inner">
+   751→    <h2 class="serif">Nueva paleta — cremas cálidos + dorado seda</h2>
+   752→    <div class="swatches">
+   753→      <div class="sw"><div class="chip" style="background:#FAF7F2"></div><div class="meta"><div class="name">Crema 50</div><div class="hex">#FAF7F2</div></div></div>
+   754→      <div class="sw"><div class="chip" style="background:#F4EFE6"></div><div class="meta"><div class="name">Crema 100</div><div class="hex">#F4EFE6</div></div></div>
+   755→      <div class="sw"><div class="chip" style="background:#EAE2D4"></div><div class="meta"><div class="name">Crema 200</div><div class="hex">#EAE2D4</div></div></div>
+   756→      <div class="sw"><div class="chip" style="background:#B08D57"></div><div class="meta"><div class="name">Dorado seda</div><div class="hex">#B08D57</div></div></div>
+   757→      <div class="sw"><div class="chip" style="background:#C9A876"></div><div class="meta"><div class="name">Dorado claro</div><div class="hex">#C9A876</div></div></div>
+   758→      <div class="sw"><div class="chip" style="background:#2A2724"></div><div class="meta"><div class="name">Tinta (no negro puro)</div><div class="hex">#2A2724</div></div></div>
+   759→    </div>
+   760→    <p style="text-align:center; margin-top:30px; font-size:13px; color: var(--ink-soft); max-width:680px; margin-left:auto; margin-right:auto;">
+   761→      El "negro" actual era <code style="background:#fff; padding:1px 4px; border-radius:3px;">oklch(0.13)</code> — negro casi puro.
+   762→      La nueva tinta es <code style="background:#fff; padding:1px 4px; border-radius:3px;">#2A2724</code> — un marrón muy oscuro y cálido.
+   763→      El header pasa a <strong>crema translúcido con blur</strong>, el footer puede mantenerse oscuro como cierre visual.
+   764→    </p>
+   765→  </div>
+   766→</section>
+   767→
+   768→<!-- ============ MOBILE NOTE ============ -->
+   769→<div class="mobile-note">
+   770→  En mobile, los 4 ítems primarios colapsan a un menú hamburguesa con secciones agrupadas: <strong>Servicios</strong> · <strong>Parque Memorial</strong> · <strong>Recursos</strong> · <strong>Contacto</strong> + botón fijo <strong>Llamar 24/7</strong>.
+   771→</div>
+   772→
+   773→</body>
+   774→</html>
+   775→
