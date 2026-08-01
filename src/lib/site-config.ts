@@ -25,15 +25,38 @@ export const siteConfig = {
   },
 };
 
-export const navItems = [
+// Navegación primaria — solo 4 ítems + CTA (regla de Miller)
+// Los sub-items viven en dropdowns para reducir carga cognitiva
+export type NavItem = {
+  label: string;
+  href: string;
+  children?: { label: string; href: string; description?: string; badge?: string }[];
+};
+
+export const navItems: NavItem[] = [
   { label: "Inicio", href: "/" },
-  { label: "Servicios", href: "/#servicios" },
-  { label: "Planes", href: "/#planes" },
-  { label: "Obituarios", href: "/#obituarios" },
-  { label: "Tour 360°", href: "/#tour" },
-  { label: "Cementerio", href: "/parque-memorial" },
-  { label: "Cobertura", href: "/#cobertura" },
-  { label: "Blog", href: "/#blog" },
+  {
+    label: "Servicios",
+    href: "/#servicios",
+    children: [
+      { label: "Velatorio", href: "/#servicios", description: "Salas principales y privadas" },
+      { label: "Cremación", href: "/#servicios", description: "Capilla propia y moderna" },
+      { label: "Pre-Arreglos", href: "/#pre-arreglos", description: "Congele el precio hoy" },
+      { label: "Traslados", href: "/#servicios", description: "Nacional e internacional" },
+      { label: "Planes GOLD · ROYAL · A", href: "/#planes", description: "Tres niveles de servicio" },
+    ],
+  },
+  { label: "Parque Memorial", href: "/parque-memorial" },
+  {
+    label: "Recursos",
+    href: "/#blog",
+    children: [
+      { label: "Obituarios", href: "/#obituarios", description: "Servicios en curso", badge: "EN VIVO" },
+      { label: "Blog & Guías", href: "/blog", description: "Artículos y recursos" },
+      { label: "Tour 360°", href: "/#tour", description: "Recorre nuestras instalaciones" },
+      { label: "Preguntas Frecuentes", href: "/#faq", description: "Respuestas a dudas comunes" },
+    ],
+  },
   { label: "Contacto", href: "/#contacto" },
 ];
 

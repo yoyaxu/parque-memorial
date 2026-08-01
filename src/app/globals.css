@@ -45,42 +45,42 @@
 }
 
 :root {
-  /* Paleta Funeraria Romana — negro, beige cálido y dorado/ámbar */
+  /* Paleta Funeraria Romana — crema cálido, tinta cálida y dorado seda */
   --radius: 0.25rem;
-  --background: oklch(0.985 0.008 80);
-  --foreground: oklch(0.18 0.005 60);
-  --card: oklch(1 0.003 80);
-  --card-foreground: oklch(0.18 0.005 60);
-  --popover: oklch(1 0.003 80);
-  --popover-foreground: oklch(0.18 0.005 60);
-  /* Negro profundo para primary */
-  --primary: oklch(0.18 0.005 60);
-  --primary-foreground: oklch(0.985 0.008 80);
-  /* Beige cálido para secondary */
-  --secondary: oklch(0.95 0.012 80);
-  --secondary-foreground: oklch(0.18 0.005 60);
-  --muted: oklch(0.94 0.01 80);
-  --muted-foreground: oklch(0.5 0.012 70);
-  /* Dorado/ámbar para acentos */
-  --accent: oklch(0.72 0.1 75);
-  --accent-foreground: oklch(0.18 0.005 60);
+  --background: oklch(0.985 0.012 80);
+  --foreground: oklch(0.22 0.008 60);
+  --card: oklch(1 0.004 80);
+  --card-foreground: oklch(0.22 0.008 60);
+  --popover: oklch(1 0.004 80);
+  --popover-foreground: oklch(0.22 0.008 60);
+  /* Tinta cálida (no negro puro) para primary */
+  --primary: oklch(0.22 0.008 60);
+  --primary-foreground: oklch(0.985 0.012 80);
+  /* Crema cálido para secondary */
+  --secondary: oklch(0.95 0.014 80);
+  --secondary-foreground: oklch(0.22 0.008 60);
+  --muted: oklch(0.95 0.012 80);
+  --muted-foreground: oklch(0.48 0.014 70);
+  /* Dorado seda para acentos — más apagado y elegante */
+  --accent: oklch(0.62 0.07 75);
+  --accent-foreground: oklch(0.985 0.012 80);
   --destructive: oklch(0.55 0.18 25);
-  --border: oklch(0.9 0.01 80);
-  --input: oklch(0.92 0.01 80);
-  --ring: oklch(0.72 0.1 75);
-  --chart-1: oklch(0.18 0.005 60);
-  --chart-2: oklch(0.72 0.1 75);
+  --border: oklch(0.9 0.012 80);
+  --input: oklch(0.92 0.012 80);
+  --ring: oklch(0.62 0.07 75);
+  --chart-1: oklch(0.22 0.008 60);
+  --chart-2: oklch(0.62 0.07 75);
   --chart-3: oklch(0.55 0.05 130);
   --chart-4: oklch(0.65 0.04 50);
   --chart-5: oklch(0.45 0.03 100);
-  --sidebar: oklch(0.985 0.008 80);
-  --sidebar-foreground: oklch(0.18 0.005 60);
-  --sidebar-primary: oklch(0.18 0.005 60);
-  --sidebar-primary-foreground: oklch(0.985 0.008 80);
-  --sidebar-accent: oklch(0.95 0.012 80);
-  --sidebar-accent-foreground: oklch(0.18 0.005 60);
-  --sidebar-border: oklch(0.9 0.012 80);
-  --sidebar-ring: oklch(0.72 0.1 75);
+  --sidebar: oklch(0.985 0.012 80);
+  --sidebar-foreground: oklch(0.22 0.008 60);
+  --sidebar-primary: oklch(0.22 0.008 60);
+  --sidebar-primary-foreground: oklch(0.985 0.012 80);
+  --sidebar-accent: oklch(0.95 0.014 80);
+  --sidebar-accent-foreground: oklch(0.22 0.008 60);
+  --sidebar-border: oklch(0.9 0.014 80);
+  --sidebar-ring: oklch(0.62 0.07 75);
 
   /* WhatsApp verde */
   --whatsapp: #25d366;
@@ -121,25 +121,44 @@
   }
 }
 
-/* Utilidades de marca */
+/* Utilidades de marca — paleta delicada */
 @layer utilities {
+  /* Tinta cálida (en lugar de negro puro) */
   .bg-noir {
-    background-color: oklch(0.13 0.005 60);
+    background-color: oklch(0.22 0.012 60);
   }
   .bg-noir-deep {
-    background-color: oklch(0.1 0.005 60);
+    background-color: oklch(0.18 0.012 60);
   }
+  /* Dorado seda — más apagado y elegante que el dorado anterior */
   .text-gold {
-    color: oklch(0.78 0.1 75);
+    color: oklch(0.62 0.08 75);
   }
   .bg-gold {
-    background-color: oklch(0.78 0.1 75);
+    background-color: oklch(0.62 0.08 75);
   }
   .border-gold {
-    border-color: oklch(0.78 0.1 75);
+    border-color: oklch(0.62 0.08 75);
   }
+  /* Crema cálido más suave */
   .bg-cream {
-    background-color: oklch(0.97 0.008 80);
+    background-color: oklch(0.985 0.012 80);
+  }
+  .bg-cream-100 {
+    background-color: oklch(0.96 0.014 80);
+  }
+  .bg-cream-200 {
+    background-color: oklch(0.93 0.016 80);
+  }
+  /* Variante para texto dorado más claro (sobre fondos oscuros) */
+  .text-gold-soft {
+    color: oklch(0.74 0.08 75);
+  }
+  /* Header translúcido con blur */
+  .header-glass {
+    background-color: oklch(0.985 0.012 80 / 0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
   }
   .section-divider {
     position: relative;
