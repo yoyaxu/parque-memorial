@@ -43,29 +43,47 @@ const serviceIconMap: Record<string, typeof Building2> = {
 export function HomeHero() {
   return (
     <>
-      {/* ===== HERO con foto de fondo ===== */}
+      {/* ===== HERO con foto de fondo — tono charcoal brown + sepia ===== */}
       <section
         aria-labelledby="hero-heading"
         className="relative overflow-hidden bg-noir text-white"
+        style={{ backgroundColor: "#2A2520" }}
       >
-        {/* Imagen de fondo */}
+        {/* Imagen de fondo con tratamiento sepia + carbón */}
         <div
           className="absolute inset-0 bg-cover bg-center"
           style={{
             backgroundImage:
               "url('https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=2000&q=80')",
-            filter: "brightness(0.5) saturate(0.7)",
+            filter: "sepia(0.45) brightness(0.42) saturate(0.55) contrast(1.05) hue-rotate(-8deg)",
           }}
           aria-hidden="true"
         />
-        {/* Overlay con degradado negro profundo — vertical */}
+        {/* Overlay carbón marrón cálido — vertical (más oscuro arriba y abajo) */}
         <div
-          className="absolute inset-0 bg-gradient-to-b from-black/85 via-black/70 to-black/95"
+          className="absolute inset-0"
+          style={{
+            background:
+              "linear-gradient(180deg, rgba(42,37,32,0.92) 0%, rgba(42,37,32,0.68) 50%, rgba(26,22,18,0.96) 100%)",
+          }}
           aria-hidden="true"
         />
-        {/* Overlay con degradado lateral — oscurece la izquierda para legibilidad del texto */}
+        {/* Overlay lateral — oscurece la izquierda para legibilidad del texto */}
         <div
-          className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/40 to-transparent"
+          className="absolute inset-0"
+          style={{
+            background:
+              "linear-gradient(90deg, rgba(26,22,18,0.88) 0%, rgba(42,37,32,0.45) 50%, transparent 100%)",
+          }}
+          aria-hidden="true"
+        />
+        {/* Veladura sepia superior — da unidad cromática */}
+        <div
+          className="absolute inset-0 mix-blend-soft-light"
+          style={{
+            background:
+              "linear-gradient(180deg, rgba(184,149,106,0.18) 0%, transparent 60%)",
+          }}
           aria-hidden="true"
         />
 
