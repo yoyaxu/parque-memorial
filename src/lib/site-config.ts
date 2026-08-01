@@ -518,3 +518,306 @@ export const coverageRegions = [
     note: "Cobertura completa y respuesta inmediata.",
   },
 ];
+
+// ============================================================
+// TIENDA — Velatorios y productos
+// ============================================================
+
+export type Velatorio = {
+  id: string;
+  name: string;
+  shortName: string;
+  address: string;
+  city: string;
+  phone?: string;
+};
+
+// Velatorios disponibles para entrega de arreglos florales
+export const velatorios: Velatorio[] = [
+  {
+    id: "funeraria-romana-principal",
+    name: "Funeraria Romana — Sala Principal",
+    shortName: "Sala Principal",
+    address: "Calle Juan Pablo Duarte #45, La Romana",
+    city: "La Romana",
+    phone: "(809) 813-4076",
+  },
+  {
+    id: "funeraria-romana-sala-2",
+    name: "Funeraria Romana — Sala 2",
+    shortName: "Sala 2",
+    address: "Calle Juan Pablo Duarte #45, La Romana",
+    city: "La Romana",
+    phone: "(809) 813-4076",
+  },
+  {
+    id: "funeraria-romana-capilla-la-atarraya",
+    name: "Capilla La Atarraya",
+    shortName: "Capilla La Atarraya",
+    address: "Calle Juan Pablo Duarte #45, La Romana",
+    city: "La Romana",
+    phone: "(809) 813-4076",
+  },
+  {
+    id: "funeraria-romana-sala-privada",
+    name: "Funeraria Romana — Sala Privada",
+    shortName: "Sala Privada",
+    address: "Calle Juan Pablo Duarte #45, La Romana",
+    city: "La Romana",
+    phone: "(809) 813-4076",
+  },
+  {
+    id: "cementerio-la-romana-1",
+    name: "Cementerio No. 1 La Romana",
+    shortName: "Cementerio No. 1",
+    address: "Calle Juan Pablo Duarte, La Romana",
+    city: "La Romana",
+  },
+  {
+    id: "otro-velatorio",
+    name: "Otro velatorio (especificar al coordinar)",
+    shortName: "Otro velatorio",
+    address: "Especificar al coordinar la entrega",
+    city: "—",
+  },
+];
+
+export type ProductCategory = "coronas" | "arreglos" | "urnas" | "recordatorios";
+
+export type Product = {
+  id: string;
+  slug: string;
+  name: string;
+  category: ProductCategory;
+  price: number;
+  currency: string;
+  shortDescription: string;
+  description: string;
+  features: string[];
+  image: string;
+  gallery?: string[];
+  featured?: boolean;
+  inStock: boolean;
+};
+
+export const productCategories: {
+  id: ProductCategory;
+  label: string;
+  description: string;
+}[] = [
+  {
+    id: "coronas",
+    label: "Coronas",
+    description: "Coronas fúnebres tradicionales y modernas",
+  },
+  {
+    id: "arreglos",
+    label: "Arreglos florales",
+    description: "Ramos, centros y arreglos diversos",
+  },
+  {
+    id: "urnas",
+    label: "Urnas",
+    description: "Urnas para cenizas y recordatorios",
+  },
+  {
+    id: "recordatorios",
+    label: "Recordatorios",
+    description: "Llaves, estampas y programas",
+  },
+];
+
+export const products: Product[] = [
+  {
+    id: "1",
+    slug: "corona-gladiolos-rosas",
+    name: "Corona de Gladiolos y Rosas",
+    category: "coronas",
+    price: 8500,
+    currency: "DOP",
+    shortDescription: "Corona clásica con gladiolos blancos y rosas rojas.",
+    description:
+      "Una corona fúnebre tradicional elaborada con gladiolos blancos frescos y rosas rojas de primera calidad. Simboliza el respeto, el amor eterno y la pureza del homenaje. Apropiada para velatorios en sala principal y servicios en capilla.",
+    features: [
+      "Gladiolos blancos frescos",
+      "Rosas rojas premium",
+      "Base estructural reforzada",
+      "Cinta negra con dedicatoria personalizable",
+      "Tamaño aproximado: 80 cm de diámetro",
+    ],
+    image:
+      "https://images.unsplash.com/photo-1490750967868-88aa4486c946?auto=format&fit=crop&w=900&q=80",
+    gallery: [
+      "https://images.unsplash.com/photo-1490750967868-88aa4486c946?auto=format&fit=crop&w=1400&q=80",
+      "https://images.unsplash.com/photo-1525164286253-04e68b9c4a45?auto=format&fit=crop&w=1400&q=80",
+    ],
+    featured: true,
+    inStock: true,
+  },
+  {
+    id: "2",
+    slug: "corona-claveles-blancos",
+    name: "Corona de Claveles Blancos",
+    category: "coronas",
+    price: 7200,
+    currency: "DOP",
+    shortDescription: "Corona elegante totalmente en claveles blancos.",
+    description:
+      "Corona fúnebre en claveles blancos, símbolo de pureza e inocencia. Una opción sobria y elegante para honrar a seres queridos. Elaborada con claveles frescos de primera selección sobre base circular reforzada.",
+    features: [
+      "Claveles blancos frescos",
+      "Densidad alta de flores",
+      "Base circular reforzada",
+      "Cinta con dedicatoria opcional",
+      "Tamaño aproximado: 70 cm de diámetro",
+    ],
+    image:
+      "https://images.unsplash.com/photo-1525164286253-04e68b9c4a45?auto=format&fit=crop&w=900&q=80",
+    featured: true,
+    inStock: true,
+  },
+  {
+    id: "3",
+    slug: "corona-mixta-premium",
+    name: "Corona Mixta Premium",
+    category: "coronas",
+    price: 12500,
+    currency: "DOP",
+    shortDescription: "Corona premium con variedad de flores de temporada.",
+    description:
+      "Nuestra corona más distinguida. Combina gladiolos, rosas, claveles, lirios y follaje verde de temporada para crear una pieza de homenaje impactante y memorable. Ideal para servicios VIP y homenajes especiales.",
+    features: [
+      "Mezcla premium de flores de temporada",
+      "Gladiolos, rosas, claveles y lirios",
+      "Follaje verde denso",
+      "Cinta negra premium con dedicatoria",
+      "Tamaño aproximado: 90 cm de diámetro",
+    ],
+    image:
+      "https://images.unsplash.com/photo-1606041008023-472dfb5e530f?auto=format&fit=crop&w=900&q=80",
+    featured: true,
+    inStock: true,
+  },
+  {
+    id: "4",
+    slug: "arreglo-centro-mesa",
+    name: "Centro de Mesa Floral",
+    category: "arreglos",
+    price: 3800,
+    currency: "DOP",
+    shortDescription: "Centro de mesa con flores blancas y verdes.",
+    description:
+      "Centro de mesa floral elegante para acompañar el velatorio. Combina flores blancas con follaje verde sobre base baja. Apropiado para mesas principales, altar y áreas comunes del velatorio.",
+    features: [
+      "Flores blancas frescas",
+      "Follaje verde decorativo",
+      "Base baja estable",
+      "Duración aproximada: 5-7 días",
+      "Tamaño aproximado: 40 cm de diámetro",
+    ],
+    image:
+      "https://images.unsplash.com/photo-1561181286-d3fee7d55364?auto=format&fit=crop&w=900&q=80",
+    inStock: true,
+  },
+  {
+    id: "5",
+    slug: "arreglo-ramo-condolencias",
+    name: "Ramo de Condolencias",
+    category: "arreglos",
+    price: 2200,
+    currency: "DOP",
+    shortDescription: "Ramo pequeño para enviar a la familia.",
+    description:
+      "Ramo de flores frescas para enviar como muestra de condolencia a la familia del difunto. Opción íntima y económica, ideal cuando se desea acompañar de cerca sin enviar una corona completa.",
+    features: [
+      "Flores frescas de temporada",
+      "Envoltorio elegante",
+      "Tarjeta con dedicatoria personalizable",
+      "Tamaño aproximado: 30 cm",
+    ],
+    image:
+      "https://images.unsplash.com/photo-1457089328109-e5d9bd499191?auto=format&fit=crop&w=900&q=80",
+    inStock: true,
+  },
+  {
+    id: "6",
+    slug: "urna-madera-cedro",
+    name: "Urna de Madera de Cedro",
+    category: "urnas",
+    price: 6500,
+    currency: "DOP",
+    shortDescription: "Urna tallada a mano en cedro dominicano.",
+    description:
+      "Urna artesanal elaborada en cedro dominicano, tallada a mano por artesanos locales. Acabado pulido con tapa hermética. Apropiada para conservar las cenizas con dignidad y belleza.",
+    features: [
+      "Madera de cedro dominicano",
+      "Tallado artesanal a mano",
+      "Tapa hermética sellada",
+      "Capacidad: 200 pulgadas cúbicas",
+      "Incluye caja protectora",
+    ],
+    image:
+      "https://images.unsplash.com/photo-1518998053901-5348d3961a04?auto=format&fit=crop&w=900&q=80",
+    inStock: true,
+  },
+  {
+    id: "7",
+    slug: "urna-metalica-bronce",
+    name: "Urna Metálica en Bronce",
+    category: "urnas",
+    price: 8900,
+    currency: "DOP",
+    shortDescription: "Urna metálica con acabado en bronce pulido.",
+    description:
+      "Urna metálica de alta calidad con acabado en bronce pulido. Diseño elegante y permanente, con tapa roscada hermética. Apropiada para conservación a largo plazo o para colocar en nicho.",
+    features: [
+      "Metal con acabado bronce",
+      "Tapa roscada hermética",
+      "Base con fieltro protector",
+      "Capacidad: 200 pulgadas cúbicas",
+      "Incluye estuche de presentación",
+    ],
+    image:
+      "https://images.unsplash.com/photo-1611712347356-10f219e4f0f4?auto=format&fit=crop&w=900&q=80",
+    inStock: true,
+  },
+  {
+    id: "8",
+    slug: "recordatorios-llaves",
+    name: "Llaves Recordatorias (paquete x 50)",
+    category: "recordatorios",
+    price: 1800,
+    currency: "DOP",
+    shortDescription: "Paquete de 50 llaves recordatorias personalizadas.",
+    description:
+      "Paquete de 50 llaves recordatorias con foto, nombre y fechas del difunto. Detalle tradicional en los servicios funerarios dominicanos. Entregadas en sobre individual para repartir entre los asistentes.",
+    features: [
+      "50 llaves impresas a color",
+      "Foto, nombre y fechas",
+      "Sobre individual incluido",
+      "Diseño personalizable",
+      "Entrega en 24-48 horas",
+    ],
+    image:
+      "https://images.unsplash.com/photo-1518998053901-5348d3961a04?auto=format&fit=crop&w=900&q=80",
+    inStock: true,
+  },
+];
+
+export function getProductBySlug(slug: string): Product | undefined {
+  return products.find((p) => p.slug === slug);
+}
+
+export function getAllProductSlugs(): string[] {
+  return products.map((p) => p.slug);
+}
+
+export function formatPrice(amount: number, currency = "DOP"): string {
+  const formatted = new Intl.NumberFormat("es-DO", {
+    style: "currency",
+    currency,
+    minimumFractionDigits: 0,
+    maximumFractionDigits: 0,
+  }).format(amount);
+  return formatted;
+}
