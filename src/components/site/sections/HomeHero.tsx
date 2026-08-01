@@ -54,12 +54,18 @@ export function HomeHero() {
           style={{
             backgroundImage:
               "url('https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=2000&q=80')",
+            filter: "brightness(0.5) saturate(0.7)",
           }}
           aria-hidden="true"
         />
-        {/* Overlay con gradiente */}
+        {/* Overlay con degradado negro profundo — vertical */}
         <div
-          className="absolute inset-0 bg-gradient-to-b from-noir/70 via-noir/75 to-noir/95"
+          className="absolute inset-0 bg-gradient-to-b from-black/85 via-black/70 to-black/95"
+          aria-hidden="true"
+        />
+        {/* Overlay con degradado lateral — oscurece la izquierda para legibilidad del texto */}
+        <div
+          className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/40 to-transparent"
           aria-hidden="true"
         />
 
