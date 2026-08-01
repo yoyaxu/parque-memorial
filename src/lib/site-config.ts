@@ -204,6 +204,8 @@ export const plans: Plan[] = [
 // Obituarios (ejemplo)
 export type Obituary = {
   id: string;
+  /** ID del velatorio en `velatorios` al que se enviarán las flores */
+  velatorioId: string;
   initials: string;
   name: string;
   age: number;
@@ -217,6 +219,7 @@ export type Obituary = {
 export const obituaries: Obituary[] = [
   {
     id: "1",
+    velatorioId: "funeraria-romana-principal",
     initials: "ME",
     name: "María Elena Rodríguez",
     age: 78,
@@ -229,6 +232,7 @@ export const obituaries: Obituary[] = [
   },
   {
     id: "2",
+    velatorioId: "funeraria-romana-sala-2",
     initials: "JR",
     name: "José Ramón Feliz",
     age: 65,

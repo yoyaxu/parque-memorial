@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Suspense } from "react";
 import { PageHero } from "@/components/site/PageHero";
 import { TiendaExplorer } from "@/components/site/sections/TiendaExplorer";
 import { ContactSection } from "@/components/site/sections/ContactSection";
@@ -23,7 +24,9 @@ export default function TiendaPage() {
         ]}
       />
 
-      <TiendaExplorer />
+      <Suspense fallback={null}>
+        <TiendaExplorer />
+      </Suspense>
       <ContactSection />
     </>
   );

@@ -10,6 +10,7 @@ import {
   Truck,
   ShieldCheck,
   ChevronRight,
+  Flower2,
 } from "lucide-react";
 import {
   velatorios,
@@ -19,8 +20,14 @@ import {
 } from "@/lib/site-config";
 import { cn } from "@/lib/utils";
 
-export function ProductPurchase({ product }: { product: Product }) {
-  const [velatorioId, setVelatorioId] = useState("");
+export function ProductPurchase({
+  product,
+  preselectedVelatorio = "",
+}: {
+  product: Product;
+  preselectedVelatorio?: string;
+}) {
+  const [velatorioId, setVelatorioId] = useState(preselectedVelatorio);
   const [quantity, setQuantity] = useState(1);
   const [dedicatoria, setDedicatoria] = useState("");
   const [buyerName, setBuyerName] = useState("");
@@ -64,7 +71,29 @@ export function ProductPurchase({ product }: { product: Product }) {
   }
 
   return (
-    <div className="grid lg:grid-cols-5 gap-10">
+    <>
+      {/* Aviso de velatorio pre-seleccionado desde el obituario */}
+      {preselectedVelatorio && selectedVelatorio && (
+        <div className="mb-8 rounded-sm border border-foreground/15 bg-foreground text-background p-4 sm:p-5 flex flex-wrap items-center gap-3">
+          <Flower2 className="h-5 w-5 shrink-0 text-gold" aria-hidden="true" />
+          <p className="text-sm sm:text-base flex-1 min-w-0">
+            Este arreglo se enviará al velatorio:{" "}
+            <span className="font-serif font-semibold">
+              {selectedVelatorio.name}
+            </span>
+            {selectedVelatorio.city !== "—" && (
+              <span className="text-background/70">
+                {" · "}{selectedVelatorio.city}
+              </span>
+            )}
+          </p>
+          <span className="text-[10px] uppercase tracking-wider text-background/60 shrink-0">
+            Pre-seleccionado del obituario
+          </span>
+        </div>
+      )}
+
+      <div className="grid lg:grid-cols-5 gap-10">
       {/* ===== Columna izquierda — galería + info ===== */}
       <div className="lg:col-span-3">
         {/* Imagen principal */}
@@ -349,5 +378,6 @@ export function ProductPurchase({ product }: { product: Product }) {
         </form>
       </div>
     </div>
+    </>
   );
 }

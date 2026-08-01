@@ -2,10 +2,12 @@
 
 import { useMemo, useState } from "react";
 import Link from "next/link";
-import { ChevronRight, Search, ShoppingBag, MapPin } from "lucide-react";
+import { useSearchParams } from "next/navigation";
+import { ChevronRight, Search, ShoppingBag, MapPin, Flower2 } from "lucide-react";
 import {
   products,
   productCategories,
+  velatorios,
   formatPrice,
   type ProductCategory,
 } from "@/lib/site-config";
@@ -16,6 +18,16 @@ type Filter = "todos" | ProductCategory;
 export function TiendaExplorer() {
   const [filter, setFilter] = useState<Filter>("todos");
   const [query, setQuery] = useState("");
+
+  // Velatorio pre-seleccionado (llega desde el obituario vía ?velatorio=<id>)
+  const searchParams = useSearchParams();
+  const velatorioId = searchParams.get("velatorio") ?? "";
+  const preselectedVelatorio = velatorioId
+    ? velatorios.find((v) => v.id === velatorioId)
+    : undefined;
+  const velatorioQS = velatorioId
+    ? `?velatorio=${encodeURIComponent(velatorioId)}`
+    : "";
 
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase();
@@ -32,6 +44,33 @@ export function TiendaExplorer() {
   return (
     <section className="bg-cream">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16 sm:py-20">
+        {/* Aviso de velatorio pre-seleccionado desde el obituario */}
+        {preselectedVelatorio && (
+          <div className="mb-8 rounded-sm border border-foreground/15 bg-foreground text-background p-4 sm:p-5 flex flex-wrap items-center justify-between gap-3">
+            <div className="flex items-center gap-3 min-w-0">
+              <Flower2 className="h-5 w-5 shrink-0 text-gold" aria-hidden="true" />
+              <p className="text-sm sm:text-base">
+                Pedido para el velatorio:{" "}
+                <span className="font-serif font-semibold">
+                  {preselectedVelatorio.name}
+                </span>
+                {preselectedVelatorio.city !== "—" && (
+                  <span className="text-background/70">
+                    {" · "}{preselectedVelatorio.city}
+                  </span>
+                )}
+              </p>
+            </div>
+            <Link
+              href="/tienda"
+              className="text-[10px] uppercase tracking-wider text-background/60 hover:text-gold underline-offset-2 hover:underline shrink-0"
+              aria-label="Quitar velatorio pre-seleccionado"
+            >
+              (cambiar)
+            </Link>
+          </div>
+        )}
+
         {/* Toolbar */}
         <div className="flex flex-col lg:flex-row gap-4 lg:items-center lg:justify-between mb-10">
           {/* Filtros por categoría */}
@@ -98,52 +137,55 @@ export function TiendaExplorer() {
           </div>
         ) : (
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-            {filtered.map((p) => (
-              <article
-                key={p.id}
-                className="group bg-card border border-border/80 rounded-sm overflow-hidden hover:border-gold hover:shadow-md transition-all"
-              >
-                <Link
-                  href={`/tienda/${p.slug}`}
-                  className="block aspect-square overflow-hidden bg-cream-200"
+            {filtered.map((p) => {
+              const href = `/tienda/${p.slug}${velatorioQS}`;
+              return (
+                <article
+                  key={p.id}
+                  className="group bg-card border border-border rounded-sm overflow-hidden shadow-sm hover:shadow-md hover:border-gold transition-all"
                 >
-                  <img
-                    src={p.image}
-                    alt={p.name}
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                    loading="lazy"
-                  />
-                </Link>
-                <div className="p-5">
-                  <span className="text-[10px] font-medium uppercase tracking-wider text-gold">
-                    {productCategories.find((c) => c.id === p.category)?.label}
-                  </span>
-                  <h3 className="mt-1.5 font-serif text-lg font-semibold text-foreground leading-tight">
-                    <Link
-                      href={`/tienda/${p.slug}`}
-                      className="hover:text-gold transition-colors"
-                    >
-                      {p.name}
-                    </Link>
-                  </h3>
-                  <p className="mt-2 text-[13px] text-muted-foreground line-clamp-2">
-                    {p.shortDescription}
-                  </p>
-                  <div className="mt-4 flex items-center justify-between">
-                    <span className="font-serif text-lg font-semibold text-foreground">
-                      {formatPrice(p.price, p.currency)}
+                  <Link
+                    href={href}
+                    className="block aspect-square overflow-hidden bg-cream-200"
+                  >
+                    <img
+                      src={p.image}
+                      alt={p.name}
+                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                      loading="lazy"
+                    />
+                  </Link>
+                  <div className="p-5">
+                    <span className="text-[10px] font-medium uppercase tracking-wider text-gold">
+                      {productCategories.find((c) => c.id === p.category)?.label}
                     </span>
-                    <Link
-                      href={`/tienda/${p.slug}`}
-                      className="inline-flex items-center gap-1 text-[11px] font-medium uppercase tracking-wider text-gold hover:underline"
-                    >
-                      Ver detalle
-                      <ChevronRight className="h-3 w-3" />
-                    </Link>
+                    <h3 className="mt-1.5 font-serif text-lg font-semibold text-foreground leading-tight">
+                      <Link
+                        href={href}
+                        className="hover:text-gold transition-colors"
+                      >
+                        {p.name}
+                      </Link>
+                    </h3>
+                    <p className="mt-2 text-[13px] text-muted-foreground line-clamp-2">
+                      {p.shortDescription}
+                    </p>
+                    <div className="mt-4 flex items-center justify-between">
+                      <span className="font-serif text-lg font-semibold text-foreground">
+                        {formatPrice(p.price, p.currency)}
+                      </span>
+                      <Link
+                        href={href}
+                        className="inline-flex items-center gap-1 text-[11px] font-medium uppercase tracking-wider text-gold hover:underline"
+                      >
+                        Ver detalle
+                        <ChevronRight className="h-3 w-3" />
+                      </Link>
+                    </div>
                   </div>
-                </div>
-              </article>
-            ))}
+                </article>
+              );
+            })}
           </div>
         )}
 

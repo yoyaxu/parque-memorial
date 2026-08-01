@@ -63,7 +63,7 @@ export function ObituariosExplorer() {
             {filtered.map((o) => (
               <article
                 key={o.id}
-                className="bg-card border border-border/80 rounded-sm overflow-hidden hover:border-gold transition-colors"
+                className="bg-card border border-border rounded-sm overflow-hidden shadow-sm hover:shadow-md hover:border-gold transition-all"
               >
                 <div className="p-7">
                   <div className="flex items-start gap-4">
@@ -84,29 +84,29 @@ export function ObituariosExplorer() {
                     </span>
                   </div>
 
-                  <blockquote className="mt-5 pl-4 border-l-2 border-gold/40 italic text-sm text-foreground/80 leading-relaxed">
+                  <blockquote className="mt-5 pl-4 border-l-2 border-gold/50 italic text-sm text-foreground/85 leading-relaxed">
                     “{o.quote}”
                   </blockquote>
 
                   <div className="mt-6 space-y-2.5 text-sm">
-                    <p className="flex items-start gap-2.5 text-foreground/80">
+                    <p className="flex items-start gap-2.5 text-foreground/85">
                       <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-gold" aria-hidden="true" />
                       <span>{o.location}</span>
                     </p>
-                    <p className="flex items-start gap-2.5 text-foreground/80">
+                    <p className="flex items-start gap-2.5 text-foreground/85">
                       <Clock className="mt-0.5 h-4 w-4 shrink-0 text-gold" aria-hidden="true" />
                       <span>{o.schedule}</span>
                     </p>
                   </div>
 
-                  <div className="mt-6 pt-4 border-t border-border/60 flex items-center justify-between text-xs text-muted-foreground">
+                  <div className="mt-6 pt-4 border-t border-border/60 flex items-center justify-between gap-2 text-xs text-muted-foreground">
                     <span className="flex items-center gap-1.5">
                       <Heart className="h-3.5 w-3.5 text-gold" aria-hidden="true" />
                       {o.condolences} condolencias
                     </span>
                     <Link
-                      href="/tienda"
-                      className="flex items-center gap-1.5 hover:text-gold transition-colors"
+                      href={`/tienda?velatorio=${encodeURIComponent(o.velatorioId)}`}
+                      className="inline-flex items-center gap-1.5 px-2.5 py-1 -mx-1 rounded-sm text-foreground font-semibold hover:bg-foreground hover:text-background transition-colors"
                     >
                       <Flower2 className="h-3.5 w-3.5" aria-hidden="true" />
                       Enviar flores
